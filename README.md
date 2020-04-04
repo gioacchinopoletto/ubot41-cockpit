@@ -10,8 +10,8 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 
 ## Based on
 
-- **[Laravel](https://laravel.com)**
-- **[Bootstrap](https://getbootstrap.com/)**
+- **[Laravel](https://laravel.com)**: PHP framework
+- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework 
 
 ### Add-on libraries and dependencies
 
