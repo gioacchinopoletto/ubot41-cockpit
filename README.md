@@ -4,14 +4,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## About UBOT41 Cockpit
 
-UBOT41 Cockpit is based on Laravel framework and is our scratch point for fresh admin panel.
+UBOT41 Cockpit is our scratch point for fresh admin panel.
 
-### Based on
+## Based on
 
 - **[Laravel](https://laravel.com)**
 - **[Bootstrap](https://getbootstrap.com/)**
+
+### Add-on libraries and dependencies
+
+- **[jQuery](https://jquery.com)**
 
 ## Contributing
 
