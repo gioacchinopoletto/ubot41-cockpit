@@ -1,7 +1,7 @@
 <p align="center"><img src="https://www.ubot41.ch/img/ubot_logo.png" width="120"></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://www.ubot41.ch"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
 ## About UBOT41 Cockpit
@@ -16,7 +16,7 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 ### Add-on libraries and dependencies
 
 - **[jQuery](https://jquery.com)**: main JS library
-- **[Sass](https://sass-lang.com)**: CSS extension language
+- **[Laravel Collective](https://laravelcollective.com)**: Form & HTML library **(required)**
 
 ## Contributing
 

@@ -1,0 +1,71 @@
+@import 'mixins';
+
+// --- colors
+$nero: #212529;
+$bianco: #ffffff;
+$blu: #262362;
+$viola: #563D7C;
+$grigio-a: #929D9E;
+$grigio-b: #7F8688;	
+
+// --- background utility classes --- //
+.bg-nero {
+	background: $nero;
+}
+.bg-bianco {
+	background: $bianco;
+}
+
+// --- forms ---//
+form label {
+	color: $nero;
+	font-weight: 700;
+}
+	form .form-control {
+		@include border-radius(0);
+		border: 0 !important;
+		border-bottom: 1px solid $grigio-b !important;
+	}
+	form .alert {
+		@include border-radius(0);
+		margin-top: 3px;
+		font-size: 90%;
+	}
+
+// --- structure ---//
+html,
+body {
+	background: $bianco;
+}
+	body {
+		font-family: 'Roboto', sans-serif;
+		font-size: 81.25%; // 13px, 0.8125em
+		font-weight: 300;
+	}
+
+// --- typo ---//
+h1 {
+	font-size: 130%;
+	text-transform: uppercase;
+	color: $viola;
+}
+
+a,
+a:active,
+a:link,
+a:visited {
+	color: $viola;
+}
+a:hover,
+a:focus {
+	color: $blu;
+	text-decoration: none;
+}
+	
+// --- login & register ---//
+.login img.logo-sx {
+	padding: calc(50vh - 40px) 0 calc(50vh - 40px) 0;
+}
+.login form {
+	margin-top: 35vh;
+}
