@@ -16,6 +16,7 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 ### Add-on libraries and dependencies
 
 - **[jQuery](https://jquery.com)**
+- **[Sass](https://sass-lang.com)**
 
 ## Contributing
 
