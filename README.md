@@ -1,4 +1,4 @@
-<p align="center"><img src="https://www.ubot41.ch/imgUubot_logo.png" width="120"></p>
+<p align="center"><img src="https://www.ubot41.ch/img/ubot_logo.png" width="120"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
