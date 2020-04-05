@@ -7,6 +7,7 @@
 ## About UBOT41 Cockpit
 
 UBOT41 Cockpit is our scratch point for fresh admin panel.
+We have users, groups and permissions management, multi language interface (fresh install provide English and Italian) and some modules.
 
 ## Based on
 
@@ -20,8 +21,10 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 - **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 
-## Notes
-We use database session. Please run: `php artisan session:table` and `php artisan migrate` afer install.
+## Installation
+1. Clone or download this repo.
+2. Run `composer update` to update all project dependencies.
+3. We use database session. Please run: `php artisan migrate` after import our dummy data.
 
 ## Contributing
 
