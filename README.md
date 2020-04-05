@@ -21,13 +21,7 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 
 ## Notes
-We use database session. Please run:
-
-`php artisan session:table`
-
-`php artisan migrate`
-
-afer install.
+We use database session. Please run: `php artisan session:table` and `php artisan migrate` afer install.
 
 ## Contributing
 
