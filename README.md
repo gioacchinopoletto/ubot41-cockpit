@@ -20,6 +20,7 @@ We have users, groups and permissions management, multi language interface (fres
 - **[Laravel Collective](https://laravelcollective.com)**: Form & HTML library **(required)**
 - **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
+- **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)**: debug bar (only for dev config)
 
 ## Installation
 1. Clone or download this repo
