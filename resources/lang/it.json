@@ -1,0 +1,23 @@
+{
+    "Cockpit login" : "Accedi a Cockpit",
+    "Login" : "Accedi",
+    "Logout" : "Esci",
+    "You have successfully logged out" : "Sei uscito con successo",
+    "Forgot your password?" : "Password dimenticata?",
+    "receive a password reset link" : "ricevi un link per il reset della tua password",
+    "Register new account" : "Registra un nuovo account",
+    "register to Cockpit" : "registrati a Cockpit",
+    "Search" : "Cerca",
+    
+    "Users" : "Utenti",
+    "Add user" : "Aggiungi utente",
+    
+    "Roles" : "Ruoli",
+    
+    "Permissions" : "Permessi",
+    "Add permission" : "Aggiungi permesso",
+    "Permission <strong>:name</strong> successfully added" : "Permesso <strong>:name</strong> aggiunto con successo",
+    "View a single permission is not permitted" : "La visulizzazione di un singolo permesso non è prevista",
+    
+    "Email" : "Indirizzo email"
+}

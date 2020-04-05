@@ -10,6 +10,7 @@
 	    <a role="button" href="{{ route('roles.index') }}" class="btn btn-dark btn-sm">{{ __('Roles')}}</a>
 		<a role="button" href="{{ route('permissions.index') }}" class="btn btn-dark btn-sm">{{ __('Permissions')}}</a>
 		@can('Add user')
+		<span class="button-separator d-xs-none d-inline-block"></span>
 		<a role="button" href="{{ route('users.create') }}" class="btn btn-dark btn-sm">{{ __('Add user')}}</a>
 		@endcan
 	</p>
@@ -19,7 +20,7 @@
 		    <input type="text" value="{{ app('request')->input('search') }}" class="form-control form-control-sm" name="search" placeholder="{{ __('Search')}}">
 		    <div class="input-group-append">
 		        @if(app('request')->input('search'))
-		        <a class="btn btn-sm" title="{{ __('messages.search_cancel')}}" href="{{ route('users.index') }}"><span class="material-icons">backspace</span></a>
+		        <a class="btn btn-sm" title="{{ __('Cancel')}}" href="{{ route('users.index') }}"><span class="material-icons">backspace</span></a>
 		        @else
 		        <button class="btn btn-sm" type="submit">
 		            <span class="material-icons">search</span>
@@ -43,7 +44,7 @@
                     @can('Add single user permission')
                     <th>{{ __('Personal permissions')}}</th>
                     @endcan
-                    <th class="text-center"><i class="fa fa-th"></i></th>
+                    <th class="text-center"><span class="material-icons">reorder</span></th>
                 </tr>
             </thead>
 
@@ -51,16 +52,16 @@
                 @foreach ($users as $user)
                 
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at->format('d.m.Y') }}</td>
-                    <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
+                    <td class="align-middle">{{ $user->name }}</td>
+                    <td class="align-middle">{{ $user->email }}</td>
+                    <td class="align-middle">{{ $user->created_at->format('d.m.Y') }}</td>
+                    <td class="align-middle">{{ $user->roles()->pluck('name')->implode(' ') }}</td>
                     @can('Add single user permission')
-					<td>
+					<td class="align-middle">
 					    <a role="button" href="{{ route('users.personalpermissions', $user->id) }}" class="btn btn-outline-info btn-sm">{{ count($user->getDirectPermissions()) }}</a>
 					</td>
 				    @endcan
-                    <td class="text-center">
+                    <td class="align-middle text-center">
 	                    {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
 	                    <div class="btn-group btn-group-sm" role="group" aria-label="">
 						  @can('View user')

@@ -1,3 +1,4 @@
+<?php
 
 namespace App\Http\Controllers;
 
@@ -24,10 +25,10 @@ class PermissionController extends Controller {
         $search = \Request::get('search');
 		
 		$permissions = Permission::where('name','like','%'.$search.'%')	
-				->orderBy('name')->paginate(30);
+				->orderBy('name')->paginate(config('cockpit.listitems'));
 				
 		return view('permissions.index',compact('permissions'))
-					->with('i', (request()->input('page', 1) - 1) * 30);
+					->with('i', (request()->input('page', 1) - 1) * config('cockpit.listitems'));
     }
 
     public function create() {
@@ -60,27 +61,16 @@ class PermissionController extends Controller {
         }
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             __('Permission :name successfully added', ['name' => $permission->name]));
+            	->with('message', array('type' => 'success', 'text' => __('Permission <strong>:name</strong> successfully added', ['name' => $permission->name])));     
 
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function show($id) {
-        return redirect('permissions');
+        
+        return redirect('permissions')
+        ->with('message', array('type' => 'danger', 'text' => __('View a single permission is not permitted')));
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function edit($id) {
         $permission = Permission::findOrFail($id);
         $roles = Role::all();

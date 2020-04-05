@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Session;
+use Auth;
+use Redirect;
+
 class LoginController extends Controller
 {
     /*
@@ -36,5 +40,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    
+    public function logout()
+    {
+	   
+		Auth::logout();
+    
+		return Redirect::to("/login")
+			->with('message', array('type' => 'success', 'text' => __('You have successfully logged out')));
     }
 }

@@ -33,18 +33,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+						@role('Admin')
 						<li class="nav-item dropdown">
 					    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					          {{ __('Users')}}
 					        </a>
 					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					          	<a class="dropdown-item" href="#">{{ __('Add user')}}</a>
+					          	<a class="dropdown-item" href="{{ route('users.create')}}">{{ __('Add user')}}</a>
 							  	<div class="dropdown-divider"></div>
 							  	<a class="dropdown-item" href="{{ route('users.index')}}">{{ __('Users')}}</a>
-							  	<a class="dropdown-item" href="#">{{ __('Roles')}}</a>
-							  	<a class="dropdown-item" href="#">{{ __('Permissions')}}</a>
+							  	<a class="dropdown-item" href="{{ route('roles.index')}}">{{ __('Roles')}}</a>
+							  	<a class="dropdown-item" href="{{ route('permissions.index')}}">{{ __('Permissions')}}</a>
 					        </div>
-					      </li>
+					    </li>
+					    @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -88,6 +90,24 @@
 	  		@yield('content')
   			
   		</div>
+  		@auth
+  		<footer class="footer">
+	  		<div class="container-fluid">
+		  		<div class="row">
+			  		<div class="col-md-6">
+			  		
+			  		</div>
+			  		<div class="col-md-6 text-right align-middle">
+				  		@if(session('applocale') == 'it' || session('applocale') == NULL)
+                    	<p class="text-muted">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
+	                    @else
+	                    	<p class="text-muted">Parli <a class="lin" href="{{ url('/lang/it') }}">italiano</a>?</p>
+	                    @endif
+			  		</div>
+		  		</div>
+	  		</div>				
+  		</footer>	
+  		@endauth
   		 
     	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

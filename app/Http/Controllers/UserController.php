@@ -31,11 +31,11 @@ class UserController extends Controller {
 		
 		$users = User::where('name','like','%'.$search.'%')
 				->orWhere('email', 'like','%'.$search.'%')	
-				->orderBy('name')->paginate(50);	
+				->orderBy('name')->paginate(config('cockpit.listitems'));	
 		
 		
 		return view('users.index',compact('users'))
-					->with('i', (request()->input('page', 1) - 1) * 50);		
+					->with('i', (request()->input('page', 1) - 1) * config('cockpit.listitems'));		
     }
 
     /**

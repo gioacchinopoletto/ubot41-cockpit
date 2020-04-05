@@ -12,6 +12,9 @@
 					{{ Form::open(array('url' => route('login'), 'class' => '')) }}
 						<img class="pb-4 d-block d-sm-none" src="{{ asset('img/logo_login.png') }}" />
 						<h1>{{ __('Cockpit login') }}</h1>
+						@if (session('message'))
+						<div class="alert alert-{{ session('message.type')}}">{{ session('message.text')}}</div>
+						@endif
 						<div class="form-group">
 							{{ Form::label('email', __('Email') ) }}
 							{{ Form::text('email', null, array('class' => 'form-control form-control-sm')) }}
@@ -37,8 +40,13 @@
 					@endif
 					@if (Route::has('register'))
                     	<p>
-                        	<a class="lin" title="{{ __('register to Cockphit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
+                        	<a class="lin" title="{{ __('register to Cockpit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
 						</p>
+                    @endif
+                    @if(session('applocale') == 'it' || session('applocale') == NULL)
+                    	<p class="text-muted">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
+                    @else
+                    	<p class="text-muted">Parli <a class="lin" href="{{ url('/lang/it') }}">italiano</a>?</p>
                     @endif
 				</div>
 			</div>		
