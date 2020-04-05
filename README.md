@@ -11,13 +11,13 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 ## Based on
 
 - **[Laravel](https://laravel.com)**: PHP framework
-- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework 
+- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.1)
 
 ### Add-on libraries and dependencies
 
 - **[jQuery](https://jquery.com)**: main JS library
 - **[Laravel Collective](https://laravelcollective.com)**: Form & HTML library **(required)**
-- **[Spatie Permissions](https://github.com/JosephSilber/bouncer)**: Role and permissions library **(required)**
+- **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 
 ## Contributing
