@@ -20,6 +20,12 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 - **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 
+## Notes
+We use database session. Please run:
+'php artisan session:table
+
+php artisan migrate'
+
 ## Contributing
 
 Thank you for considering contributing to the UBOT41 Cockpit.
