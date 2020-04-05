@@ -22,9 +22,12 @@ We have users, groups and permissions management, multi language interface (fres
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 
 ## Installation
-1. Clone or download this repo.
-2. Run `composer update` to update all project dependencies.
-3. We use database session. Please run: `php artisan migrate` after import our dummy data.
+1. Clone or download this repo
+2. Run `composer update` to update all project dependencies
+3. We use database session. Please run: `php artisan migrate` before import our dummy data
+
+### Installation notes
+- **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management 
 
 ## Contributing
 
