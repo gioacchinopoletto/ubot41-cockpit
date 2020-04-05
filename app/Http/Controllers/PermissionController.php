@@ -40,7 +40,7 @@ class PermissionController extends Controller {
 
     public function store(Request $request) {
         $this->validate($request, [
-            'name'=>'required|min:5|max:40',
+            'name'=>'required|min:5|max:255',
         ]);
 
         $name = $request['name'];
@@ -78,13 +78,6 @@ class PermissionController extends Controller {
         return view('permissions.edit', compact('permission', 'roles'));
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function update(Request $request, $id) {
         $permission = Permission::findOrFail($id);
         $this->validate($request, [
@@ -104,32 +97,22 @@ class PermissionController extends Controller {
         }
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             __('messages.edit_permission_successfull', ['name' => $permission->name]));
-
+            ->with('message', array('type' => 'success', 'text' => __('Permission <strong>:name</strong> successfully edited', ['name' => $permission->name])));
     }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+    
     public function destroy($id) {
         $permission = Permission::findOrFail($id);
 
-    //Make it impossible to delete this specific permission 
-    if ($permission->name == "Administer roles & permissions") {
+	    //Make it impossible to delete this specific permission 
+	    if ($permission->name == "Administer roles & permissions") {
             return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Cannot delete this Permission!');
+            ->with('message', array('type' => 'danger', 'text' => __('Permission <strong>:name</strong> can be deleted', ['name' => $permission->name])));
         }
 
         $permission->delete();
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Permission deleted!');
+            ->with('message', array('type' => 'success', 'text' => __('Permission <strong>:name</strong> successfully deleted', ['name' => $permission->name])));
 
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="row m-5">
 <div class="col-md-12">
-    <h1><i class="fa fa-key"></i> {{ __('Permissions')}}</h1>
+    <h1>{{ __('Permissions')}}</h1>
 	
 	@if (session('message'))
 		<div class="alert alert-{{ session('message.type')}} alert-dismissible fade show" role="alert">

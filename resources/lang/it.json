@@ -8,6 +8,7 @@
     "Register new account" : "Registra un nuovo account",
     "register to Cockpit" : "registrati a Cockpit",
     "Search" : "Cerca",
+    "Save" : "Salva",
     
     "Users" : "Utenti",
     "Add user" : "Aggiungi utente",
@@ -15,9 +16,17 @@
     "Roles" : "Ruoli",
     
     "Permissions" : "Permessi",
+    "Permission (key)" : "Permesso (chiave)",
     "Add permission" : "Aggiungi permesso",
+    "Add permission to role" : "Aggiungi il permesso ad un ruolo",
+    "Roles with this permission" : "Ruoli con questo permesso",
+    "Edit <strong>:name</strong> permission" : "Modifica il permesso <strong>:name</strong>",
     "Permission <strong>:name</strong> successfully added" : "Permesso <strong>:name</strong> aggiunto con successo",
     "View a single permission is not permitted" : "La visulizzazione di un singolo permesso non è prevista",
+    "Permission <strong>:name</strong> successfully edited" : "Permesso <strong>:name</strong> modificato con successo",
+    "Permission <strong>:name</strong> can be deleted" : "Il permesso <strong>:name</strong> non può essere cancellato",
+    "Permission <strong>:name</strong> successfully deleted" : "Permesso <strong>:name</strong> cancellato con successo",
     
-    "Email" : "Indirizzo email"
+    "Email" : "Indirizzo email",
+    "Password" : "Password"
 }

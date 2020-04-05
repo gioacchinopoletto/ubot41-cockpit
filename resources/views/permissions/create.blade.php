@@ -1,27 +1,28 @@
-{{-- \resources\views\permissions\create.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 
-<div class="row justify-content-center">
-
-<div class="col-md-11">
-
-    <h3><i class="fa fa-key"></i> {{ __('messages.add_permission')}}</h3>
+<div class="row m-5">
+<div class="col-md-12">
+    <h1>{{ __('Add permission')}}</h1>
+    
     <p class="text-right">
-	    <a role="button" href="{{ route('permissions.index') }}" class="btn btn-info btn-sm">{{ __('messages.permissions')}}</a>
+	    <a role="button" href="{{ route('permissions.index') }}" class="btn btn-dark btn-sm">{{ __('Permissions')}}</a>
     </p>
 
     {{ Form::open(array('url' => 'permissions')) }}
 
     <div class="form-group">
-       	{{ Form::label('name', __('messages.permission')) }}
+       	{{ Form::label('name', __('Permission (key)')) }}
         {{ Form::text('name', '', array('class' => 'form-control form-control-sm')) }}
+        @error('name')
+			<div class="alert alert-danger">{{ $message }}</div>
+		@enderror
     </div>
     
     
     @if(!$roles->isEmpty())
-        <h3>{{ __('messages.permission_to_role') }}</h3>
+        <h1 class="mt-5">{{ __('Add permission to role') }}</h1>
 		
 		<div class='form-group'>
         @foreach ($roles as $role) 
@@ -35,7 +36,7 @@
 		</div>
     @endif
     
-    {{ Form::submit(__('messages.button_save'), array('class' => 'btn btn-info btn-sm btn-block')) }}
+    {{ Form::submit(__('Save'), array('class' => 'btn btn-dark btn-sm btn-block')) }}
 
     {{ Form::close() }}
 

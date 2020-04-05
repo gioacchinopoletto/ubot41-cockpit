@@ -32,7 +32,7 @@ We have users, groups and permissions management, multi language interface (fres
 
 
 ### Installation notes
-- **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management 
+- **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management: login with `dummy@dummy.com` as username and `dummydummy` as password for the first time 
 
 ## Contributing
 
