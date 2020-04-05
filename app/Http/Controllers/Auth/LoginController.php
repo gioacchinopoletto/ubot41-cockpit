@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Session;
 use Auth;
 use Redirect;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -49,5 +50,20 @@ class LoginController extends Controller
     
 		return Redirect::to("/login")
 			->with('message', array('type' => 'success', 'text' => __('You have successfully logged out')));
+    }
+    
+    /**
+     * Get the needed authorization credentials from the request. (copied from AuthenticatesUsers trait
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        
+        $credentials['active'] = 1;
+        
+        return $credentials;
     }
 }

@@ -60,7 +60,7 @@
 						 	@endcan
 
 		                    @can('Permission - delete')
-									<button type="submit" class="btn btn-dark btn-sm"><span class="material-icons">delete</span>
+									{{ Form::button('<span class="material-icons">delete</span>', ['class' => 'btn btn-dark', 'type' => 'submit']) }}
 							@endcan
 	                     </div>
 						{!! Form::close() !!}

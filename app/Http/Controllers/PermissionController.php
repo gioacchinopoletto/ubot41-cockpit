@@ -32,10 +32,16 @@ class PermissionController extends Controller {
     }
 
     public function create() {
-        
-        $roles = Role::get();
+        if(Auth::user()->hasPermissionTo('Permission - add'))
+	    {
+        	$roles = Role::get();
 
-        return view('permissions.create')->with('roles', $roles);
+			return view('permissions.create')->with('roles', $roles);
+		else
+		{
+			return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+		}	
     }
 
     public function store(Request $request) {

@@ -9,6 +9,7 @@
     "register to Cockpit" : "registrati a Cockpit",
     "Search" : "Cerca",
     "Save" : "Salva",
+    "You can't access to this resource" : "Non hai i permessi per accedere a questa risorsa",
     
     "Users" : "Utenti",
     "Add user" : "Aggiungi utente",
@@ -28,5 +29,7 @@
     "Permission <strong>:name</strong> successfully deleted" : "Permesso <strong>:name</strong> cancellato con successo",
     
     "Email" : "Indirizzo email",
-    "Password" : "Password"
+    "Password" : "Password",
+    "Fullname" : "Nominativo",
+    "Member since" : "Membro dal"
 }

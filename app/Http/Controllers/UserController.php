@@ -38,24 +38,16 @@ class UserController extends Controller {
 					->with('i', (request()->input('page', 1) - 1) * config('cockpit.listitems'));		
     }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
     public function create() {
-    	if(Auth::user()->hasPermissionTo('Add user'))
+    	if(Auth::user()->hasPermissionTo('User - add'))
 	    {
-	        $signalers = User::role('Signaling')->where('active', 1)->orderBy('name')->pluck('name', 'id')->toArray();
-			$signalers = array('0' => __('messages.no_signaler')) + $signalers;
-	        
 	        $roles = Role::get();
-	        return view('users.create', ['roles'=>$roles, 'signalers' => $signalers]);
+	        return view('users.create', ['roles'=>$roles]);
 	    }
 	    else
 	    {
 		    return redirect()->route('home')
-		    ->with('flash_message', __('You can\'t access to this resource'));
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
 	    }    
 	        
     }
@@ -72,14 +64,6 @@ class UserController extends Controller {
             'name'=>'required|max:191',
             'email'=>'required|email|max:191|unique:users',
             'password'=>'required|min:6|confirmed',
-            'address'=>'min:3|max:191',
-            'ntp'=>'min:3|max:5',
-            'city'=>'min:1|max:191',
-            'region'=>'min:2|max:191',
-            'vat'=>'required_without_all:address,ntp,city,region|max:16',
-            'locale' => 'required',
-            'iban' => 'sometimes',
-            'bic' => 'sometimes',
             
         ]);
 
@@ -87,20 +71,11 @@ class UserController extends Controller {
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => $request['password'],
-            'active' => 1,
-            'address' => $request['address'],
-            'ntp' => $request['ntp'],
-            'city' => $request['city'],
-            'region' => $request['region'],
-            'vat' => $request['vat'],
-            'signaling_id' => $request['signaling_id'],
-            'locale' => $request['locale'],
-            'iban' => $request['iban'],
-            'bic' => $request['bic'],
         ]);
 
         $roles = $request['roles']; //Retrieving the roles field
-    //Checking if a role was selected
+    
+		//Checking if a role was selected
         if (isset($roles)) {
 
             foreach ($roles as $role) {
@@ -111,18 +86,9 @@ class UserController extends Controller {
         
         Log::info('[MC]['.Auth::user()->name.'] Creazione utente: '.$user->id);
                 
-		if(Auth::user()->hasRole('Admin')) 
-        {
-	     	return redirect()->route('users.index')
+		return redirect()->route('users.index')
             	->with('flash_message', __('messages.add_user_successfull'));   
-        }
-		elseif(Auth::user()->hasRole('Signaling'))
-        {
-	        return redirect()->route('dashboard')
-	        ->with('flash_message', __('messages.add_user_successfull_next_steps'));
-        }
-        
-              
+             
     }
 
     /**
