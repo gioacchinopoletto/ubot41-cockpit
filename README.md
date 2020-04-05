@@ -22,9 +22,11 @@ UBOT41 Cockpit is our scratch point for fresh admin panel.
 
 ## Notes
 We use database session. Please run:
-'php artisan session:table
 
-php artisan migrate'
+`php artisan session:table`
+`php artisan migrate`
+
+afer install.
 
 ## Contributing
 
