@@ -49,23 +49,36 @@ h1 {
 	text-transform: uppercase;
 	color: $viola;
 }
-
-a,
-a:active,
-a:link,
-a:visited {
+a.lin,
+a.lin:active,
+a.lin:link,
+a.lin:visited {
 	color: $viola;
 }
-a:hover,
-a:focus {
+a.lin:hover,
+a.lin:focus {
 	color: $blu;
 	text-decoration: none;
 }
 	
 // --- login & register ---//
+.login {
+	height: 100vh;
+}
 .login img.logo-sx {
 	padding: calc(50vh - 40px) 0 calc(50vh - 40px) 0;
 }
 .login form {
-	margin-top: 35vh;
+	margin-top: 30vh;
+}
+
+// --- admin navbar ---//
+.dropdown-item {
+	font-size: 81.25%; // 13px, 0.8125em
+}
+
+// --- admin tables ---//
+thead .material-icons { 
+	font-size: 81.25% !important; // 13px, 0.8125em
+	padding-left: 5px;
 }

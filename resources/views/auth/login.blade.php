@@ -4,13 +4,13 @@
 	
 	<div class="row login">
 		<div class="col-md-6 align-items-center h-100 d-inline-block bg-nero text-center align-middle">
-			<img class="logo-sx d-none d-sm-inline-block" src="{{ asset('img/logo_menu.png') }}" />
+			<img class="logo-sx d-none d-sm-inline-block" src="{{ asset('img/logo_login.png') }}" />
 		</div>
 		<div class="col-md-6 align-items-center h-100 d-inline-block">
 			<div class="row">
 				<div class="col-md-5 offset-md-3">
 					{{ Form::open(array('url' => route('login'), 'class' => '')) }}
-						<img class="pb-4 d-block d-sm-none" src="{{ asset('img/logo_menu.png') }}" />
+						<img class="pb-4 d-block d-sm-none" src="{{ asset('img/logo_login.png') }}" />
 						<h1>{{ __('Cockpit login') }}</h1>
 						<div class="form-group">
 							{{ Form::label('email', __('Email') ) }}
@@ -31,13 +31,13 @@
 						</div>		
 					{{ Form::close() }}
 					@if (Route::has('password.request'))
-	                    <p><a title="{{ __('receive a password reset link') }}" href="{{ route('password.request') }}">
+	                    <p><a class="lin" title="{{ __('receive a password reset link') }}" href="{{ route('password.request') }}">
 	                        {{ __('Forgot your password?') }}</a>
 	                    </p>
 					@endif
 					@if (Route::has('register'))
                     	<p>
-                        	<a title="{{ __('register to Cockphit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
+                        	<a class="lin" title="{{ __('register to Cockphit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
 						</p>
                     @endif
 				</div>
