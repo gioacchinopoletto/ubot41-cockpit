@@ -15,7 +15,7 @@
 		
 		<link href="{{ asset('css/ubot.css') }}" rel="stylesheet">
 
-		<title>{{ config('app.name', 'Cockpit | UBOT41') }}</title>
+		<title>{{ config('app.name') }} | {{ config('cockpit.company_name') }}</title>
 		
 		@yield('top-scripts')
   	</head>
