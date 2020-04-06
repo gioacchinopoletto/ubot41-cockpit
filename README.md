@@ -33,6 +33,7 @@ We have users, groups and permissions management, multi language interface (fres
 
 ### Installation notes
 **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management: login with `dummy@dummy.com` as username and `dummydummy` as password for the first time
+
 We have add db seeders with all dummy data. After database migration, run `php artisan db:seed` to populate the database. Into `/mysql` you can find our mysql dump if you don't like seeders.
 
 ## Contributing
