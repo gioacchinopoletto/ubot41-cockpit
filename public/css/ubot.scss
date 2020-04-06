@@ -35,13 +35,14 @@ body {
 		font-family: 'Roboto', sans-serif;
 		font-size: 81.25%; // 13px, 0.8125em
 		font-weight: 300;
+		margin-bottom: 35px;
 	}
 .footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 35px;
   background: $bianco;
+  position: absolute;
+  bottom: 0;
 }	
 
 // --- typo ---//

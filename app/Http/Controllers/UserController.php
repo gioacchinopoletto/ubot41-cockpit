@@ -54,6 +54,7 @@ class UserController extends Controller {
             'name'=>'required|max:191',
             'email'=>'required|email|max:191|unique:users',
             'password'=>'required|min:6|confirmed',
+            'roles' =>'required',
             
         ]);
 
@@ -80,13 +81,7 @@ class UserController extends Controller {
             	->with('message', array('type' => 'success', 'text' => __("User <strong>:name</strong> successfully added", ['name' => $user->name]))); 
              
     }
-
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+    
     public function show($id) {
         
         if( ! Auth::user()->hasPermissionTo('User - view')) return redirect()->route('home')
@@ -95,30 +90,28 @@ class UserController extends Controller {
         $user = User::findOrFail($id); 
 	        
 		$roles = Role::get();
+		
+		$hashUser = md5( strtolower(trim($user->email))); 
 	    
-		return view('users.show', compact('user', 'roles'));    
+		return view('users.show', compact('user', 'roles', 'hashUser'));    
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function edit($id) {
         
         if( ! Auth::user()->hasPermissionTo('User - edit')) return redirect()->route('home')
 		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
         
         $user = User::findOrFail($id); 
-        $roles = Role::get(); 
+        $roles = Role::get();
+        
+        $hashUser = md5( strtolower(trim($user->email))); 
 
-        return view('users.edit', compact('user', 'roles')); 
+        return view('users.edit', compact('user', 'roles', 'hashUser')); 
     }
 
     public function update(Request $request, $id) {
         
-        $user = User::findOrFail($id); //Get role specified by id
+        $user = User::findOrFail($id);
 
 		$password = $request['password'];
         
@@ -127,7 +120,7 @@ class UserController extends Controller {
 	        $this->validate($request, [
 	            'name'=>'required|max:120',
 	            'email'=>'required|email|unique:users,email,'.$id,
-	            'password'=>'required|min:6|confirmed', 
+	            'password'=>'required|min:6|confirmed' 
 	        ]);
 	        
 	        $input = $request->only(['name', 'email', 'password']);
@@ -136,7 +129,7 @@ class UserController extends Controller {
 		    
 		    $this->validate($request, [
 	            'name'=>'required|max:120',
-	            'email'=>'required|email|unique:users,email,'.$id,
+	            'email'=>'required|email|unique:users,email,'.$id
 	        ]);
 		    
 		    $input = $request->only(['name', 'email']);
@@ -198,31 +191,16 @@ class UserController extends Controller {
 	    
     }
     
-    /**
-    * Show the form for editing user profile.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function editProfile() {
         
     	$id = Auth::user()->id;
-        $user = User::findOrFail($id); //Get user with specified id
-        $wallets = $user->wallets()->get();
-        $roles = $user->roles()->get();
+        $user = User::findOrFail($id);
         
-        // related
-        $cofinancing = $user->cofinancing()->get();
-        $cofinancing_count = $cofinancing->count();
-        $contracts = $user->contracts()->get();
-        $contracts_count = $contracts->count();
-
-        return view('users.profile', compact('user', 'roles')); 	        
+        $hashUser = md5( strtolower(trim($user->email)));
+     
+        return view('users.profile', compact('user', 'hashUser')); 	        
     }
     
-    /*
-	 * Direct assign permession
-	 */
 	public function personalPermissions($id)
 	{
 		
@@ -231,7 +209,7 @@ class UserController extends Controller {
 		
 		$user = User::findOrFail($id);
 		
-		$permissions = Permission::all();
+		$permissions = Permission::orderby('name', 'asc')->get();
 		$permissions_from_role = $user->getPermissionsViaRoles();
 		
 		return view('users.permissions', compact('user', 'permissions', 'permissions_from_role'));
@@ -255,8 +233,8 @@ class UserController extends Controller {
 		 	$user->syncPermissions();   
 	    }
 	    
-	    return redirect()->route('users.edit', $id)
-		    ->with('flash_message', __('messages.edit_permissions_single_successfull'));
+	    return redirect()->route('users.index')
+		     ->with('message', array('type' => 'success', 'text' => __('Personal permissions successfully edited for user <strong>:name</strong>', ['name' => $user->name])));
     }
     
     

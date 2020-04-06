@@ -60,12 +60,12 @@
             <tbody>
                 @foreach ($users as $user)
                 	@php
-						$hashUser = md5( strtolower(trim(Auth::user()->email)));
+						$hashUser = md5( strtolower(trim($user->email)));
 						$tr_class = ($user->active == 0) ? "table-danger" : "";
 					@endphp
                 <tr class="{{ $tr_class }}">
                     <td class="align-middle">
-						<img class="rounded-circle mr-1" src="https://www.gravatar.com/avatar/{{$hashUser}}?r=g&d=wavatar&s=30"> {{ $user->name }}
+						<img class="rounded-circle mr-1" src="https://www.gravatar.com/avatar/{{$hashUser}}?r=g&d=identicon&s=30"> {{ $user->name }}
 					</td>
                     <td class="align-middle">{{ $user->email }}</td>
                     <td class="align-middle">{{ $user->created_at->format('d.m.Y') }}</td>

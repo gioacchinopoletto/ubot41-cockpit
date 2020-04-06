@@ -44,20 +44,22 @@
 						@enderror
 				    </div>
 				
+					<h1 class="mt-5 mb-3">{{ __('Add role to user') }}</h1>
 					<div class='form-group'>
-				        <h1> {{ __('Add role to user') }}</h1>
 				        
-				        
-				        @hasanyrole('Admin')
-					        @foreach ($roles as $role)
-					        	<div class="custom-controls-stacked custom-control custom-checkbox">
-					        		{{ Form::checkbox('roles[]',  $role->id, false, ['class' => 'custom-control-input'] ) }}
-					        		<label class="custom-control-label">{{ ucfirst($role->name) }}</label>
+					        @foreach ($roles as $role) 
+					        	<div class="form-check form-check-inline">
+									<label>
+									{{ Form::checkbox('roles[]',  $role->id ) }}
+									{{ Form::label($role->name, ucfirst($role->name)) }}
+									</label>
 					        	</div>
 					        @endforeach
-					    @endhasanyrole  
-				        
+					      
 				    </div>
+				    @error('roles')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
 					
 				
 			    {{ Form::submit(__('Save'), array('class' => 'btn btn-dark btn-sm btn-block')) }}

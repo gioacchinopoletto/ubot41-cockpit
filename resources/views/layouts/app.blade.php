@@ -72,6 +72,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users.profile') }}">{{ __('Profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,6 +84,16 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                            	<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="material-icons" style="padding-top: 7px">translate</span></a>	
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+									@if(session('applocale') == 'it')
+										<a class="dropdown-item" href="{{ url('/lang/en') }}">English</a>
+									@else <!-- if session is null or not set we have EN as default language -->
+										<a class="dropdown-item" href="{{ url('/lang/it') }}">Italiano</a></p>
+									@endif
+								</div>
+							</li>
                         @endguest
                     </ul>
                 </div>
@@ -92,26 +103,8 @@
   		<div class="container-fluid">
 	  		
 	  		@yield('content')
-  			
+	  		
   		</div>
-  		@auth
-  		<footer class="footer">
-	  		<div class="container-fluid">
-		  		<div class="row">
-			  		<div class="col-md-6">
-			  		
-			  		</div>
-			  		<div class="col-md-6 text-right align-middle">
-				  		@if(session('applocale') == 'it')
-                    	<p class="text-muted">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
-	                    @else <!-- if session is null or not set we have EN as default language -->
-	                    	<p class="text-muted">Parli <a class="lin" href="{{ url('/lang/it') }}">italiano</a>?</p>
-	                    @endif
-			  		</div>
-		  		</div>
-	  		</div>				
-  		</footer>	
-  		@endauth
   		 
     	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

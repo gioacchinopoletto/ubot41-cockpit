@@ -10,7 +10,10 @@
     "Search" : "Cerca",
     "Save" : "Salva",
     "You can't access to this resource" : "Non hai i permessi per accedere a questa risorsa",
+    "Back" : "Indietro",
     
+    "Personal permissions" : "Permessi personali",
+    "Profile" : "Profilo",
     "Users" : "Utenti",
     "Add user" : "Aggiungi utente",
     "User <strong>:name</strong> successfully added" : "Utente <strong>:name</strong> aggiunto con successo",
@@ -20,6 +23,9 @@
     "User <strong>:name</strong> successfully edited" : "Utente <strong>:name</strong> modificato con successo",
     "Profile successfully edited" : "Profilo modificato con successo",
     "User <strong>:name</strong> successfully edited" : "Utente <strong>:name</strong> modificato con successo",
+    "<strong>:name</strong> (edit)" : "<strong>:name</strong> (modifica)",
+    "Type password only if you want to change it" : "Digita la password solo se desideri cambiarla",
+    "You can change your avatar setting your email with <a href='https://en.gravatar.com' target='_blank'>Gravatar</a>." : "Puoi cambiare il tuo avatar impostando la tua email su <a href='https://en.gravatar.com' target='_blank'>Gravatar</a>.",
     
     "Role" : "Ruolo",
     "Roles" : "Ruoli",
@@ -44,6 +50,9 @@
     "Permission <strong>:name</strong> successfully edited" : "Permesso <strong>:name</strong> modificato con successo",
     "Permission <strong>:name</strong> can be deleted" : "Il permesso <strong>:name</strong> non può essere cancellato",
     "Permission <strong>:name</strong> successfully deleted" : "Permesso <strong>:name</strong> cancellato con successo",
+    "Inherit from user role" : "Ereditato dal ruolo utente",
+    "Personal permission" : "Permesso personale",
+    "Personal permissions successfully edited for user <strong>:name</strong>" : "Permessi personali modificati con successo per <strong>:name</strong>",
     
     "Email" : "Indirizzo email",
     "Password" : "Password",
