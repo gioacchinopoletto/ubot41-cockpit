@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\User;
 use Auth;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 
 use Session;
 
@@ -61,7 +63,7 @@ class UserController extends Controller {
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => $request['password'],
+            'password' => Hash::make($request['password']),
         ]);
 
         $roles = $request['roles']; //Retrieving the roles field
@@ -124,6 +126,7 @@ class UserController extends Controller {
 	        ]);
 	        
 	        $input = $request->only(['name', 'email', 'password']);
+	        $input['password'] = Hash::make($input['password']);
 	    }
 	    else {
 		    
