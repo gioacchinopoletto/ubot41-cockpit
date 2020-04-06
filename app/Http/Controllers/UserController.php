@@ -17,11 +17,16 @@ use Session;
 class UserController extends Controller {
 
     public function __construct() {
+        
         $this->middleware(['auth']); 
+    
     }
 
     public function index() {
     
+        if( ! Auth::user()->hasPermissionTo('User - view')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
         $search = \Request::get('search');
 		
 		$users = User::where('name','like','%'.$search.'%')
@@ -35,17 +40,12 @@ class UserController extends Controller {
 
     public function create() {
     	
-    	if(Auth::user()->hasPermissionTo('User - add'))
-	    {
-	        $roles = Role::get();
-	        return view('users.create', ['roles'=>$roles]);
-	    }
-	    else
-	    {
-		    return redirect()->route('home')
+    	if( ! Auth::user()->hasPermissionTo('User - add')) return redirect()->route('home')
 		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
-	    }    
+    	
+	    $roles = Role::get();
 	        
+		return view('users.create', ['roles'=>$roles]);    
     }
 
     public function store(Request $request) {
@@ -88,19 +88,15 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function show($id) {
-        if(Auth::user()->hasPermissionTo('User - view'))
-	    {
-		    $user = User::findOrFail($id); 
-	        $roles = Role::get();
+        
+        if( ! Auth::user()->hasPermissionTo('User - view')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
+        $user = User::findOrFail($id); 
+	        
+		$roles = Role::get();
 	    
-	        return view('users.show', compact('user', 'roles'));
-	         
-		}
-		else
-	    {
-		    return redirect()->route('home')
-		     ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
-	    }     
+		return view('users.show', compact('user', 'roles'));    
     }
 
     /**
@@ -110,23 +106,18 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function edit($id) {
-        if(Auth::user()->hasPermissionTo('User - edit'))
-	    {
-	        $user = User::findOrFail($id); //Get user with specified id
-	        $roles = Role::get(); //Get all roles
-	        $wallets = $user->wallets()->get();
-	        
-	        $signalers = User::role('Signaling')->where('active', 1)->orderBy('name')->pluck('name', 'id')->toArray();
-			$signalers = array('0' => __('messages.no_signaler')) + $signalers;
-	
-	        return view('users.edit', compact('user', 'roles', 'wallets', 'signalers')); //pass user and roles data to view
-	    }
-	    else
-	    {
-		    return redirect()->route('home')
-		     ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
-	    }    
+        
+        if( ! Auth::user()->hasPermissionTo('User - edit')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
+        $user = User::findOrFail($id); //Get user with specified id
+        $roles = Role::get(); //Get all roles
+        $wallets = $user->wallets()->get();
+        
+        $signalers = User::role('Signaling')->where('active', 1)->orderBy('name')->pluck('name', 'id')->toArray();
+		$signalers = array('0' => __('messages.no_signaler')) + $signalers;
 
+        return view('users.edit', compact('user', 'roles', 'wallets', 'signalers')); //pass user and roles data to view  
     }
 
     /**
@@ -137,52 +128,42 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function update(Request $request, $id) {
+        
         $user = User::findOrFail($id); //Get role specified by id
 
 		$password = $request['password'];
         
         if (isset($password)) {
+	        
 	        $this->validate($request, [
 	            'name'=>'required|max:120',
 	            'email'=>'required|email|unique:users,email,'.$id,
-	            'password'=>'required|min:6|confirmed',
-	            'address'=>'min:3|max:191',
-	            'ntp'=>'min:3|max:5',
-	            'city'=>'min:1|max:191',
-	            'region'=>'min:2|max:191',
-	            'vat'=>'required_without_all:address,ntp,city,region|max:16',
-	           	'locale' => 'required',
-	           	'iban' => 'sometimes',
-			   	'bic' => 'sometimes', 
+	            'password'=>'required|min:6|confirmed', 
 	        ]);
-	        $input = $request->only(['name', 'email', 'password', 'address', 'ntp', 'city', 'region', 'vat', 'signaling_id', 'locale', 'iban', 'bic']);
+	        
+	        $input = $request->only(['name', 'email', 'password']);
 	    }
 	    else {
+		    
 		    $this->validate($request, [
 	            'name'=>'required|max:120',
 	            'email'=>'required|email|unique:users,email,'.$id,
-	            'address'=>'min:3|max:191',
-	            'ntp'=>'min:3|max:5',
-	            'city'=>'min:1|max:191',
-	            'region'=>'min:2|max:191',
-	            'vat'=>'required_without_all:address,ntp,city,region|max:16',
-	            'locale' => 'required',
-	            'iban' => 'sometimes',
-			   	'bic' => 'sometimes',
 	        ]);
-		    $input = $request->only(['name', 'email', 'address', 'ntp', 'city', 'region', 'vat', 'signaling_id', 'locale', 'iban', 'bic']);
+		    
+		    $input = $request->only(['name', 'email']);
 	    }
 		
         $user->fill($input)->save();
 
 		$roles = $request['roles']; //Retreive all roles
+        
         if (isset($roles)) {        
             $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
         }        
         
         Log::info('[MC]['.Auth::user()->name.'] Aggiornamento Utente: '.$id);
         
-        if(Auth::user()->hasanyrole('Admin|Team'))
+        if(Auth::user()->hasanyrole('Admin'))
         {
         	return redirect()->route('users.index')
             	->with('flash_message', __('messages.edit_user_successfull'));
@@ -201,24 +182,21 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function destroy($id) {
-	    if(Auth::user()->hasPermissionTo('Delete user'))
-	    {
-	        $user = User::findOrFail($id);
-	        $user->roles()->detach(); 
-	        $user->delete();
-	        
-	        // to do: verificare se ci sono altre tabelle collegate
-	
-	        Log::info('[MC]['.Auth::user()->name.'] Cancellazione Utente: '.$id);
-	        
-	        return redirect()->route('users.index')
-	            ->with('flash_message', __('messages.delete_user_successfull'));
-        }
-	    else
-	    {
-		    return redirect()->route('users.index')
-		    ->with('flash_message', __('You can\'t access to this resource'));
-	    }    
+	    
+	    if( ! Auth::user()->hasPermissionTo('User - edit')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+	    
+        $user = User::findOrFail($id);
+        $user->roles()->detach(); 
+        $user->delete();
+        
+        // to do: verificare se ci sono altre tabelle collegate
+
+        Log::info('[MC]['.Auth::user()->name.'] Cancellazione Utente: '.$id);
+        
+        return redirect()->route('users.index')
+            ->with('flash_message', __('messages.delete_user_successfull'));
+            
     }
     
     /**
@@ -229,8 +207,8 @@ class UserController extends Controller {
     */
     public function changeState($id, $state)
     {
-	    if(!Auth::user()->hasPermissionTo('Change user state')) return redirect()->route('users.index')
-		    ->with('flash_message', __('You can\'t access to this resource'));
+	    if( ! Auth::user()->hasPermissionTo('User - change state')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
 	    
 	    $user = User::findOrFail($id);
 	    $user->active = $state;
@@ -251,19 +229,18 @@ class UserController extends Controller {
     */
     public function editProfile() {
         
-        	$id = Auth::user()->id;
-	        $user = User::findOrFail($id); //Get user with specified id
-	        $wallets = $user->wallets()->get();
-	        $roles = $user->roles()->get();
-	        
-	        // related
-	        $cofinancing = $user->cofinancing()->get();
-	        $cofinancing_count = $cofinancing->count();
-	        $contracts = $user->contracts()->get();
-	        $contracts_count = $contracts->count();
-	
-	        return view('users.profile', compact('user', 'wallets', 'roles', 'cofinancing_count', 'contracts_count')); 	        
+    	$id = Auth::user()->id;
+        $user = User::findOrFail($id); //Get user with specified id
+        $wallets = $user->wallets()->get();
+        $roles = $user->roles()->get();
+        
+        // related
+        $cofinancing = $user->cofinancing()->get();
+        $cofinancing_count = $cofinancing->count();
+        $contracts = $user->contracts()->get();
+        $contracts_count = $contracts->count();
 
+        return view('users.profile', compact('user', 'roles')); 	        
     }
     
     /*
@@ -271,6 +248,10 @@ class UserController extends Controller {
 	 */
 	public function personalPermissions($id)
 	{
+		
+		if( ! Auth::user()->hasPermissionTo('User - add single permission')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+		
 		$user = User::findOrFail($id);
 		
 		$permissions = Permission::all();
@@ -298,71 +279,10 @@ class UserController extends Controller {
 		    ->with('flash_message', __('messages.edit_permissions_single_successfull'));
     }
     
-    public function payments($id = null)
-    {
-	    if(Auth::user()->hasAnyRole('User', 'Signaling') || $id == null )
-	    {
-		    $id = Auth::user()->id; 
-	    }
-	    
-	    $user = User::findOrFail($id);
-	    $contracts = $user->contracts()->get();
-	    
-	    return view('users.payments', compact('id','user', 'contracts'));
-    }
-    
-    public function cofinancepayments($id = null)
-    {
-	    if(Auth::user()->hasAnyRole('User', 'Signaling'))
-	    {
-		    $id = Auth::user()->id; 
-	    }
-	    
-	    $user = User::findOrFail($id);
-	    $contracts = $user->cofinancing()->get();
-	    
-	    return view('users.cofinancepayments', compact('id','user', 'contracts'));
-    }
     
 	    
-    /**
-    * Change state of Mailchimp subscription.
-    *
-    * @param  int  $id, $list, $state
-    * @return \Illuminate\Http\Response
-    */
-    public function changeMCState($id, $list, $state)
-    {
-	    if(!Auth::user()->hasPermissionTo('Change user state')) return redirect()->route('users.index')
-		    ->with('flash_message', __('You can\'t access to this resource'));
-	    
-	    $user = User::findOrFail($id);
-	    
-	    if($state == 'add')
-	    {
-		    $fullname = explode(" ", $user->name);
-		    Mailchimp::subscribe($list, $user->email, $merge = ['FNAME' => $fullname[0], 'LNAME' => $fullname[1]], false);
-	    }
-	    if($state == 'remove')
-	    {
-		    Mailchimp::unsubscribe($list, $user->email);
-	    }
-	    
-	    Log::info('[MC]['.Auth::user()->name.'] Cambio Stato/Utente: '.$state.'/'.$user->email);
-	    
-	    return redirect()->route('users.show', $id)
-            ->with('flash_message', __('messages.edit_user_successfull'));
-	    
-    }
     
-    public function walletlist()
-    {
-	    if(!Auth::user()->hasPermissionTo('Delete user')) return redirect()->route('users.index')
-		    ->with('flash_message', __('You can\'t access to this resource'));
-		    
-		$users = User::where('name','like','%'.$search.'%')
-				->orWhere('email', 'like','%'.$search.'%')	
-				->orderBy('name')->paginate(50);    
-    }
+    
+    
     
 }

@@ -18,7 +18,7 @@
 	<p class="text-right">    
 	    <a role="button" href="{{ route('roles.index') }}" class="btn btn-dark btn-sm">{{ __('Roles')}}</a>
 		<a role="button" href="{{ route('permissions.index') }}" class="btn btn-dark btn-sm">{{ __('Permissions')}}</a>
-		@can('Add user')
+		@can('User - add')
 		<span class="button-separator d-xs-none d-inline-block"></span>
 		<a role="button" href="{{ route('users.create') }}" class="btn btn-dark btn-sm">{{ __('Add user')}}</a>
 		@endcan

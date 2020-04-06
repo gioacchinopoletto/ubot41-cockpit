@@ -18,33 +18,32 @@ class PermissionController extends Controller {
     }
 
     public function index() {
-	    
-        // $permissions = Permission::all(); //Get all permissions
-        // return view('permissions.index')->with('permissions', $permissions);
-        
-        $search = \Request::get('search');
+		
+		if( ! Auth::user()->hasPermissionTo('Administer roles & permissions')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+		
+		$search = \Request::get('search');
 		
 		$permissions = Permission::where('name','like','%'.$search.'%')	
 				->orderBy('name')->paginate(config('cockpit.listitems'));
 				
 		return view('permissions.index',compact('permissions'))
 					->with('i', (request()->input('page', 1) - 1) * config('cockpit.listitems'));
+						
     }
 
     public function create() {
-        if(Auth::user()->hasPermissionTo('Permission - add'))
-	    {
-        	$roles = Role::get();
-
-			return view('permissions.create')->with('roles', $roles);
-		else
-		{
-			return redirect()->route('home')
+        
+        if( ! Auth::user()->hasPermissionTo('Permission - add')) return redirect()->route('home')
 		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
-		}	
+        
+        $roles = Role::get();
+
+		return view('permissions.create')->with('roles', $roles);	
     }
 
     public function store(Request $request) {
+        
         $this->validate($request, [
             'name'=>'required|min:5|max:255',
         ]);
@@ -62,6 +61,7 @@ class PermissionController extends Controller {
                 $r = Role::where('id', '=', $role)->firstOrFail(); // Match input role to db record
 
                 $permission = Permission::where('name', '=', $name)->first(); // Match input //permission to db record
+                
                 $r->givePermissionTo($permission);
             }
         }
@@ -73,22 +73,30 @@ class PermissionController extends Controller {
 
     public function show($id) {
         
-        return redirect('permissions')
+        return redirect()->route('home')
         ->with('message', array('type' => 'danger', 'text' => __('View a single permission is not permitted')));
     }
 
     public function edit($id) {
-        $permission = Permission::findOrFail($id);
-        $roles = Role::all();
-
-        return view('permissions.edit', compact('permission', 'roles'));
+    	
+    	if( ! Auth::user()->hasPermissionTo('Permission - edit')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+    	
+    	$permission = Permission::findOrFail($id);
+	    
+	    $roles = Role::all();
+	
+		return view('permissions.edit', compact('permission', 'roles'));   
     }
 
     public function update(Request $request, $id) {
+        
         $permission = Permission::findOrFail($id);
+        
         $this->validate($request, [
             'name'=>'required|max:40',
         ]);
+        
         $input = $request->only('name');
         
         $permission->fill($input)->save();
@@ -107,18 +115,23 @@ class PermissionController extends Controller {
     }
     
     public function destroy($id) {
+        
+        if( ! Auth::user()->hasPermissionTo('Permission - delete')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
         $permission = Permission::findOrFail($id);
-
-	    //Make it impossible to delete this specific permission 
-	    if ($permission->name == "Administer roles & permissions") {
-            return redirect()->route('permissions.index')
-            ->with('message', array('type' => 'danger', 'text' => __('Permission <strong>:name</strong> can be deleted', ['name' => $permission->name])));
-        }
-
-        $permission->delete();
-
-        return redirect()->route('permissions.index')
-            ->with('message', array('type' => 'success', 'text' => __('Permission <strong>:name</strong> successfully deleted', ['name' => $permission->name])));
+	
+		//Make it impossible to delete this specific permission 
+		if ($permission->name == "Administer roles & permissions") {
+	            return redirect()->route('permissions.index')
+	            ->with('message', array('type' => 'danger', 'text' => __('Permission <strong>:name</strong> can be deleted', ['name' => $permission->name])));
+	    }
+	
+		$permission->delete();
+	
+	    return redirect()->route('permissions.index')
+	            ->with('message', array('type' => 'success', 'text' => __('Permission <strong>:name</strong> successfully deleted', ['name' => $permission->name]))); 	          
 
     }
+    
 }
