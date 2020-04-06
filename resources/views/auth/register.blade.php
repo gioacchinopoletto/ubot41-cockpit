@@ -47,7 +47,11 @@
 					<p>
                         <a class="lin" title="{{ __('login to Cockphit') }}" href="{{ route('login') }}">{{ __('Have an account?') }}</a>
 					</p>
-                    
+                    @if(session('applocale') == 'it')
+                    	<p class="text-muted">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
+                    @else <!-- if session is null or not set we have EN as default language -->
+                    	<p class="text-muted">Parli <a class="lin" href="{{ url('/lang/it') }}">italiano</a>?</p>
+                    @endif
 				</div>
 			</div>
 		</div>

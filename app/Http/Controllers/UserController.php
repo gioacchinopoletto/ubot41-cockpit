@@ -20,11 +20,6 @@ class UserController extends Controller {
         $this->middleware(['auth']); 
     }
 
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
     public function index() {
     
         $search = \Request::get('search');
@@ -39,6 +34,7 @@ class UserController extends Controller {
     }
 
     public function create() {
+    	
     	if(Auth::user()->hasPermissionTo('User - add'))
 	    {
 	        $roles = Role::get();
@@ -52,14 +48,8 @@ class UserController extends Controller {
 	        
     }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
     public function store(Request $request) {
-    //Validate name, email and password fields
+   
         $this->validate($request, [
             'name'=>'required|max:191',
             'email'=>'required|email|max:191|unique:users',
@@ -84,10 +74,10 @@ class UserController extends Controller {
             }
         }
         
-        Log::info('[MC]['.Auth::user()->name.'] Creazione utente: '.$user->id);
+        Log::info('['.Auth::user()->name.'] User - add: ('.$user->id.') '.$user->name);
                 
 		return redirect()->route('users.index')
-            	->with('flash_message', __('messages.add_user_successfull'));   
+            	->with('message', array('type' => 'success', 'text' => __("User <strong>:name</strong> successfully added", ['name' => $user->name]))); 
              
     }
 
@@ -98,37 +88,18 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function show($id) {
-        if(Auth::user()->hasPermissionTo('View user'))
+        if(Auth::user()->hasPermissionTo('User - view'))
 	    {
 		    $user = User::findOrFail($id); 
 	        $roles = Role::get();
-	        $wallets = $user->wallets()->get();
-	        $packages = Packages::where('active', 1)->get();
-	        
-	        // related
-	        $cofinancing = $user->cofinancing()->get();
-	        $cofinancing_count = $cofinancing->count();
-	        $contracts = $user->contracts()->get();
-	        $contracts_count = $contracts->count();
-	        
-	        $mc_mining = Mailchimp::check(config('miningcentral.mc_mining_list'), $user->email);
-	        $mc_mining_status = Mailchimp::status(config('miningcentral.mc_mining_list'), $user->email);
-	        $mc_signalers = Mailchimp::check(config('miningcentral.mc_signalers_list'), $user->email);
-	        $mc_signalers_status = Mailchimp::status(config('miningcentral.mc_signalers_list'), $user->email);
-	        $mc_financing = Mailchimp::check(config('miningcentral.mc_financing_list'), $user->email);
-	        $mc_financing_status = Mailchimp::status(config('miningcentral.mc_financing_list'), $user->email);
-	        $mc_deeplearning = Mailchimp::check(config('miningcentral.mc_deeplearning_list'), $user->email);
-	        $mc_deeplearning_status = Mailchimp::status(config('miningcentral.mc_deeplearning_list'), $user->email);
-	        
-	        Log::info('[MC]['.Auth::user()->name.'] Visualizza Utente: '.$id); 
-	
-	        return view('users.show', compact('user', 'roles', 'wallets', 'packages', 'mc_mining', 'mc_mining_status', 'mc_signalers', 'mc_signalers_status', 'mc_financing', 'mc_financing_status', 'mc_deeplearning', 'mc_deeplearning_status', 'cofinancing_count', 'contracts_count'));
+	    
+	        return view('users.show', compact('user', 'roles'));
 	         
 		}
 		else
 	    {
-		    return redirect()->route('users.index')
-		    ->with('flash_message', __('You can\'t access to this resource'));
+		    return redirect()->route('home')
+		     ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
 	    }     
     }
 
@@ -139,7 +110,7 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function edit($id) {
-        if(Auth::user()->hasPermissionTo('Edit user'))
+        if(Auth::user()->hasPermissionTo('User - edit'))
 	    {
 	        $user = User::findOrFail($id); //Get user with specified id
 	        $roles = Role::get(); //Get all roles
@@ -152,8 +123,8 @@ class UserController extends Controller {
 	    }
 	    else
 	    {
-		    return redirect()->route('dashboard')
-		    ->with('flash_message', __('You can\'t access to this resource'));
+		    return redirect()->route('home')
+		     ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
 	    }    
 
     }

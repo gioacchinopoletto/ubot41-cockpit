@@ -43,9 +43,9 @@
                         	<a class="lin" title="{{ __('register to Cockpit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
 						</p>
                     @endif
-                    @if(session('applocale') == 'it' || session('applocale') == NULL)
+                    @if(session('applocale') == 'it')
                     	<p class="text-muted">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
-                    @else
+                    @else <!-- if session is null or not set we have EN as default language -->
                     	<p class="text-muted">Parli <a class="lin" href="{{ url('/lang/it') }}">italiano</a>?</p>
                     @endif
 				</div>
