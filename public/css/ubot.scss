@@ -1,12 +1,6 @@
 @import 'mixins';
 
-// --- colors
-$nero: #212529;
-$bianco: #ffffff;
-$blu: #262362;
-$viola: #563D7C;
-$grigio-a: #929D9E;
-$grigio-b: #7F8688;	
+@import 'colors';
 
 // --- background utility classes --- //
 .bg-nero {
@@ -112,4 +106,9 @@ button .material-icons {
 // --- admin ux ---//
 .button-separator {
 	@include separator(10px, 10px); 
-}	
+}
+.col-divid-3 {
+  column-count: 3;
+  column-gap: 30px;
+  margin-bottom: 30px;
+}		

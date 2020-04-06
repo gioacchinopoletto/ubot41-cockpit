@@ -1,45 +1,46 @@
-{{-- \resources\views\roles\create.blade.php --}}
-@extends('layouts.app-desk')
+@extends('layouts.app')
 
 @section('content')
-<div class="card">
-<div class="row">
 
-<div class="col-md-12">
+<div class="row m-5">
+	<div class="col-md-12">
+    	<h1>{{ __('Add role')}}</h1>
 
-    <h4 class="card-title"><i class="fa fa-key"></i> {{ __('messages.add_role')}}</h4>
-    <div class="card-body">
+
     <p class="text-right">
-	    <a role="button" href="{{ route('roles.index') }}" class="btn btn-info btn-sm">{{ __('messages.roles')}}</a>
+	    <a role="button" href="{{ route('roles.index') }}" class="btn btn-dark btn-sm">{{ __('Roles')}}</a>
     </p>
 
     {{ Form::open(array('url' => 'roles')) }}
 
     <div class="form-group">
-        {{ Form::label('name', __('messages.role')) }}
+        {{ Form::label('name', __('Role')) }}
         {{ Form::text('name', null, array('class' => 'form-control form-control-sm')) }}
+        @error('name')
+			<div class="alert alert-danger">{{ $message }}</div>
+		@enderror
     </div>
 
-    <h3>{{ __('messages.add_permission') }}</h3>
+    <h1 class="mt-5 mb-3">{{ __('Add permission to role') }}</h1>
+	
 	<div class="col-divid-3">
 	    	@foreach ($permissions as $permission)
-				
-				<div class='form-group'>
-			    	<div class="custom-controls-stacked custom-control custom-checkbox">
-						{{ Form::checkbox('permissions[]',  $permission->id, false, ['class' => 'custom-control-input'] ) }}
-						<label class="custom-control-label">
-							{{ ucfirst($permission->name) }}
-						</label>
-			    	</div>
-			    </div>			
+				<div class="form-check">
+					<label>
+						{{ Form::checkbox('permissions[]',  $permission->id ) }}
+						{{ Form::label($permission->name, ucfirst($permission->name)) }}
+					</label>
+        		</div>			
 			@endforeach	
     </div>
+    @error('permissions')
+		<div class="alert alert-danger">{{ $message }}</div>
+	@enderror
     
-    {{ Form::submit(__('messages.button_save'), array('class' => 'btn btn-info btn-sm btn-block')) }}
+    {{ Form::submit(__('Save'), array('class' => 'btn btn-dark btn-sm btn-block')) }}
 
     {{ Form::close() }}
-    </div>
-</div>
+   
 </div>
 </div>
 @endsection

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
-//Importing laravel-permission models
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -14,39 +14,33 @@ use Session;
 class RoleController extends Controller {
 
     public function __construct() {
+        
         $this->middleware(['auth', 'isAdmin']);
+        
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
-        $roles = Role::all();//Get all roles
+        
+        if( ! Auth::user()->hasPermissionTo('Role - view')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
+        $roles = Role::all(); 
 
         return view('roles.index')->with('roles', $roles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
-        $permissions = Permission::all();//Get all permissions
+        
+        if( ! Auth::user()->hasPermissionTo('Role - add')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
+        $permissions = Permission::orderBy('name', 'asc')->get();
 
         return view('roles.create', ['permissions'=>$permissions]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
-    //Validate name and permissions field
+    
         $this->validate($request, [
             'name'=>'required|unique:roles|max:10',
             'permissions' =>'required',
@@ -60,53 +54,41 @@ class RoleController extends Controller {
         $permissions = $request['permissions'];
 
         $role->save();
-    //Looping thru selected permissions
+		
+		//Looping thru selected permissions
         foreach ($permissions as $permission) {
             $p = Permission::where('id', '=', $permission)->firstOrFail(); 
-         //Fetch the newly created role and assign permission
+			
+			//Fetch the newly created role and assign permission
             $role = Role::where('name', '=', $name)->first(); 
             $role->givePermissionTo($p);
         }
 
         return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role'. $role->name.' added!'); 
+            	->with('message', array('type' => 'success', 'text' => __('Role <strong>:name</strong> successfully added', ['name' => $role->name])));       
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id) {
-        return redirect('roles');
+        return redirect()->route('home')
+        ->with('message', array('type' => 'danger', 'text' => __('View a single role is not permitted')));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id) {
+        
+        if( ! Auth::user()->hasPermissionTo('Role - edit')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
         $role = Role::findOrFail($id);
+        
         $permissions = Permission::all();
 
         return view('roles.edit', compact('role', 'permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id) {
 
-        $role = Role::findOrFail($id);//Get role with the given id
-    //Validate name and permission fields
+        $role = Role::findOrFail($id);
+    
         $this->validate($request, [
             'name'=>'required|max:10|unique:roles,name,'.$id,
             'permissions' =>'required',
@@ -128,24 +110,25 @@ class RoleController extends Controller {
         }
 
         return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role'. $role->name.' updated!');
+            	->with('message', array('type' => 'success', 'text' => __('Role <strong>:name</strong> successfully edited', ['name' => $role->name])));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        if( ! Auth::user()->hasPermissionTo('Role - delete')) return redirect()->route('home')
+		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
+        
         $role = Role::findOrFail($id);
+        
+        if($role->hasPermissionTo('Administer roles & permissions')) {
+	            return redirect()->route('roles.index')
+	            ->with('message', array('type' => 'danger', 'text' => __(' Role <strong>:name</strong> can be deleted', ['name' => $role->name])));
+	    }
+        
         $role->delete();
-
+        
         return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role deleted!');
+            	->with('message', array('type' => 'success', 'text' => __('Role <strong>:name</strong> successfully deleted', ['name' => $role->name])));
 
     }
 }

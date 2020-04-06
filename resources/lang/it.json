@@ -14,8 +14,24 @@
     "Users" : "Utenti",
     "Add user" : "Aggiungi utente",
     "User <strong>:name</strong> successfully added" : "Utente <strong>:name</strong> aggiunto con successo",
+    "You can't delete yourself" : "Non puoi eliminare te stesso",
+    "You can't delete an Admin, please change user role before delete it" : "Non puoi cancellare un utente con ruolo Admin, cambia il suo ruolo prima della cancellazione",
+    "User <strong>:name</strong> successfully deleted" : "Utente <strong>:name</strong> cancellato con successo",
+    "User <strong>:name</strong> successfully edited" : "Utente <strong>:name</strong> modificato con successo",
+    "Profile successfully edited" : "Profilo modificato con successo",
+    "User <strong>:name</strong> successfully edited" : "Utente <strong>:name</strong> modificato con successo",
     
+    "Role" : "Ruolo",
     "Roles" : "Ruoli",
+    "Add role to user" : "Assegna ruolo",
+    "Add role" : "Aggiungi ruolo",
+    "Role <strong>:name</strong> successfully added" : "Ruolo <strong>:name</strong> aggiunto con successo",
+    "View a single role is not permitted" : "La visualizzazione di un singolo ruolo non è prevista",
+    "Edit <strong>:name</strong> role" : "Modifica il ruolo <strong>:name</strong>",
+    "Add or remove permission to role" : "Aggiungi o modifica i permessi per il ruolo",
+    "Role <strong>:name</strong> successfully edited" : "Ruolo <strong>:name</strong> modificato con successo",
+    "Role <strong>:name</strong> can be deleted" : "Il ruolo <strong>:name</strong> non può essere cancellato",
+    "Role <strong>:name</strong> successfully deleted" : "Ruolo <strong>:name</strong> cancellato con successo",  
     
     "Permissions" : "Permessi",
     "Permission (key)" : "Permesso (chiave)",
@@ -31,6 +47,7 @@
     
     "Email" : "Indirizzo email",
     "Password" : "Password",
+    "Password confirmation" : "Conferma password",
     "Fullname" : "Nominativo",
     "Member since" : "Membro dal"
 }

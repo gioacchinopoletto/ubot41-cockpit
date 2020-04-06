@@ -10,9 +10,6 @@
 	    <a role="button" href="{{ route('permissions.index') }}" class="btn btn-dark btn-sm">{{ __('Permissions')}}</a>
     </p>
 	
-	
-
-    
     {{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}
 
     <div class="form-group">

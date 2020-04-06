@@ -110,23 +110,12 @@ class UserController extends Controller {
         if( ! Auth::user()->hasPermissionTo('User - edit')) return redirect()->route('home')
 		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
         
-        $user = User::findOrFail($id); //Get user with specified id
-        $roles = Role::get(); //Get all roles
-        $wallets = $user->wallets()->get();
-        
-        $signalers = User::role('Signaling')->where('active', 1)->orderBy('name')->pluck('name', 'id')->toArray();
-		$signalers = array('0' => __('messages.no_signaler')) + $signalers;
+        $user = User::findOrFail($id); 
+        $roles = Role::get(); 
 
-        return view('users.edit', compact('user', 'roles', 'wallets', 'signalers')); //pass user and roles data to view  
+        return view('users.edit', compact('user', 'roles')); 
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function update(Request $request, $id) {
         
         $user = User::findOrFail($id); //Get role specified by id
@@ -158,53 +147,43 @@ class UserController extends Controller {
 		$roles = $request['roles']; //Retreive all roles
         
         if (isset($roles)) {        
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
+            $user->roles()->sync($roles);        
         }        
-        
-        Log::info('[MC]['.Auth::user()->name.'] Aggiornamento Utente: '.$id);
         
         if(Auth::user()->hasanyrole('Admin'))
         {
         	return redirect()->route('users.index')
-            	->with('flash_message', __('messages.edit_user_successfull'));
+            	->with('message', array('type' => 'success', 'text' => __('User <strong>:name</strong> successfully edited', ['name' => $user->name])));
         }
         else
         {
 	        return redirect()->route('users.profile')
-            	->with('flash_message', __('messages.edit_user_successfull'));
+            	->with('message', array('type' => 'success', 'text' => __('Profile successfully edited')));
         }    	
     }
 
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function destroy($id) {
 	    
-	    if( ! Auth::user()->hasPermissionTo('User - edit')) return redirect()->route('home')
+	    if( ! Auth::user()->hasPermissionTo('User - delete')) return redirect()->route('home')
 		    ->with('message', array('type' => 'danger', 'text' => __("You can't access to this resource")));
 	    
         $user = User::findOrFail($id);
+        $name_temp = $user->name;
+        
+        if(Auth::user()->id == $user->id) return redirect()->route('users.index')
+	            ->with('message', array('type' => 'danger', 'text' => __("You can't delete yourself")));
+        
+        if($user->hasPermissionTo('Administer roles & permissions')) return redirect()->route('users.index')
+	            ->with('message', array('type' => 'danger', 'text' => __("You can't delete an Admin, please change user role before delete it")));
+        
         $user->roles()->detach(); 
         $user->delete();
         
-        // to do: verificare se ci sono altre tabelle collegate
-
-        Log::info('[MC]['.Auth::user()->name.'] Cancellazione Utente: '.$id);
-        
         return redirect()->route('users.index')
-            ->with('flash_message', __('messages.delete_user_successfull'));
+	            ->with('message', array('type' => 'success', 'text' => __('User <strong>:name</strong> successfully deleted', ['name' => $name_temp])));
             
     }
     
-    /**
-    * Change state of the specified resource from storage.
-    *
-    * @param  int  $id, $state
-    * @return \Illuminate\Http\Response
-    */
     public function changeState($id, $state)
     {
 	    if( ! Auth::user()->hasPermissionTo('User - change state')) return redirect()->route('home')
@@ -212,12 +191,10 @@ class UserController extends Controller {
 	    
 	    $user = User::findOrFail($id);
 	    $user->active = $state;
-	    $user->save();
-	    
-	    Log::info('[MC]['.Auth::user()->name.'] Cambio Stato/Utente: '.$state.'/'.$id);
-	    
+	    $user->save();	    
+	   
 	    return redirect()->route('users.index')
-            ->with('flash_message', __('messages.edit_user_successfull'));
+            ->with('message', array('type' => 'success', 'text' => __('User <strong>:name</strong> successfully edited', ['name' => $user->name])));
 	    
     }
     
@@ -259,7 +236,10 @@ class UserController extends Controller {
 		
 		return view('users.permissions', compact('user', 'permissions', 'permissions_from_role'));
 	} 
-	 
+	
+	/*
+	 * sync permession
+	 */ 
 	public function syncPermissions(Request $request, $id)
     {
 	    $user = User::findOrFail($id);

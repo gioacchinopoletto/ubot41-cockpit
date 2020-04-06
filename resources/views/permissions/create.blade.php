@@ -22,7 +22,7 @@
     
     
     @if(!$roles->isEmpty())
-        <h1 class="mt-5">{{ __('Add permission to role') }}</h1>
+        <h1 class="mt-5 mb-3">{{ __('Add permission to role') }}</h1>
 		
 		<div class='form-group'>
         @foreach ($roles as $role) 
