@@ -11,6 +11,10 @@
     "Save" : "Salva",
     "You can't access to this resource" : "Non hai i permessi per accedere a questa risorsa",
     "Back" : "Indietro",
+    "Verify your email address" : "Verifica il tuo indirizzo email",
+    "A fresh verification link has been sent to your email address" : "Ti abbiamo inviato via email un link per la verifica della password",
+    "Back to login" : "Torna al login",
+    "Send password reset link" : "Invia link per il reset della password",
     
     "Personal permissions" : "Permessi personali",
     "Profile" : "Profilo",
