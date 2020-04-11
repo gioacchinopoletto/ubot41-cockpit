@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "alphametric/laravel-validation-rules",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alphametric/laravel-validation-rules.git",
-                "reference": "586ccf377fd9261ca3095833ceaa6140596d0b7d"
+                "reference": "fc3ab3088ac86b9183f10e025fd0324b87f0cf4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alphametric/laravel-validation-rules/zipball/586ccf377fd9261ca3095833ceaa6140596d0b7d",
-                "reference": "586ccf377fd9261ca3095833ceaa6140596d0b7d",
+                "url": "https://api.github.com/repos/alphametric/laravel-validation-rules/zipball/fc3ab3088ac86b9183f10e025fd0324b87f0cf4b",
+                "reference": "fc3ab3088ac86b9183f10e025fd0324b87f0cf4b",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "rules",
                 "validation"
             ],
-            "time": "2019-12-31T10:48:24+00:00"
+            "time": "2020-04-11T13:31:09+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -994,16 +994,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.5.1",
+            "version": "v7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b2457b1ddb9c59396313eae4e948bdc5fa5251db"
+                "reference": "3a3b3f7fea69813f5a03449c6314bfb42c3ccf78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b2457b1ddb9c59396313eae4e948bdc5fa5251db",
-                "reference": "b2457b1ddb9c59396313eae4e948bdc5fa5251db",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3a3b3f7fea69813f5a03449c6314bfb42c3ccf78",
+                "reference": "3a3b3f7fea69813f5a03449c6314bfb42c3ccf78",
                 "shasum": ""
             },
             "require": {
@@ -1141,7 +1141,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-04-07T18:52:38+00:00"
+            "time": "2020-04-08T15:54:18+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1672,16 +1672,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.3.0",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "9a9981c347c5c49d6dfe5cf826bb882b824080dc"
+                "reference": "bd43ec7152eaaab3bd8c6d0aa95ceeb1df8ee120"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9a9981c347c5c49d6dfe5cf826bb882b824080dc",
-                "reference": "9a9981c347c5c49d6dfe5cf826bb882b824080dc",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd43ec7152eaaab3bd8c6d0aa95ceeb1df8ee120",
+                "reference": "bd43ec7152eaaab3bd8c6d0aa95ceeb1df8ee120",
                 "shasum": ""
             },
             "require": {
@@ -1720,7 +1720,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-11-08T13:50:10+00:00"
+            "time": "2020-04-10T16:34:50+00:00"
         },
         {
             "name": "opis/closure",
