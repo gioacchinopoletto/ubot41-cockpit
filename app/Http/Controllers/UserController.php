@@ -122,20 +122,22 @@ class UserController extends Controller {
 	        $this->validate($request, [
 	            'name'=>'required|max:120',
 	            'email'=>'required|email|unique:users,email,'.$id,
-	            'password'=>'required|min:6|confirmed' 
+	            'password'=>'required|min:6|confirmed',
+	            'locale' => 'required'
 	        ]);
 	        
-	        $input = $request->only(['name', 'email', 'password']);
+	        $input = $request->only(['name', 'email', 'password', 'locale']);
 	        $input['password'] = Hash::make($input['password']);
 	    }
 	    else {
 		    
 		    $this->validate($request, [
 	            'name'=>'required|max:120',
-	            'email'=>'required|email|unique:users,email,'.$id
+	            'email'=>'required|email|unique:users,email,'.$id,
+	            'locale' => 'required'
 	        ]);
 		    
-		    $input = $request->only(['name', 'email']);
+		    $input = $request->only(['name', 'email', 'locale']);
 	    }
 		
         $user->fill($input)->save();
@@ -157,6 +159,7 @@ class UserController extends Controller {
             	->with('message', array('type' => 'success', 'text' => __('Profile successfully edited')));
         }    	
     }
+
 
     public function destroy($id) {
 	    

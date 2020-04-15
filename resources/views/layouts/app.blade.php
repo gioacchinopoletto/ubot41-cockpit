@@ -90,7 +90,7 @@
 									@if(session('applocale') == 'it')
 										<a class="dropdown-item" href="{{ url('/lang/en') }}">English</a>
 									@else <!-- if session is null or not set we have EN as default language -->
-										<a class="dropdown-item" href="{{ url('/lang/it') }}">Italiano</a></p>
+										<a class="dropdown-item" href="{{ url('/lang/it') }}">Italiano</a>
 									@endif
 								</div>
 							</li>

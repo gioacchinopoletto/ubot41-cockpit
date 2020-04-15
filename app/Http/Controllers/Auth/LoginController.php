@@ -66,4 +66,15 @@ class LoginController extends Controller
         
         return $credentials;
     }
+    
+    /**
+     * Get user language locale after successfull authentication. (copied from AuthenticatesUsers trait
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return set locale
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        Session::put('applocale', $user->locale);
+    }
 }
