@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.22)
 # Database: ubot41-cockpit
-# Generation Time: 2020-04-06 22:30:40 +0000
+# Generation Time: 2020-04-15 14:55:42 +0000
 # ************************************************************
 
 
@@ -47,7 +47,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
@@ -59,7 +59,8 @@ VALUES
 	(3,'2019_08_19_000000_create_failed_jobs_table',1),
 	(4,'2020_04_04_162559_create_permission_tables',2),
 	(5,'2020_04_05_112344_create_sessions_table',3),
-	(6,'2020_04_05_172828_add_active_to_users_table',4);
+	(6,'2020_04_05_172828_add_active_to_users_table',4),
+	(7,'2020_04_15_103419_add_locale_to_user_table',5);
 
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -101,6 +102,7 @@ LOCK TABLES `model_has_roles` WRITE;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`)
 VALUES
 	(1,'App\\User',1),
+	(1,'App\\User',2);
 
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -132,7 +134,7 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
@@ -211,7 +213,7 @@ CREATE TABLE `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
@@ -240,6 +242,16 @@ CREATE TABLE `sessions` (
   UNIQUE KEY `sessions_id_unique` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`)
+VALUES
+	('TcbAhupvOe2xBDvp2UkFwEao0ZJHGDMYsEF5vJ07',NULL,'127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36','YTo0OntzOjY6Il90b2tlbiI7czo0MDoiY2IyNWFKcUlRejJmc0M3WjZWdnAwc1VlT3JvZGJ4UmRUQkdUeHNleiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6OToiYXBwbG9jYWxlIjtzOjI6ImVuIjt9',1586956828);
+
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 # Dump of table users
 # ------------------------------------------------------------
@@ -256,16 +268,17 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
+  `locale` char(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `active`)
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `active`, `locale`)
 VALUES
-	(1,'Dummy User','dummy@dummy.com',NULL,'$2y$10$IK2.JPmCBUmQAt2JzmfH6uqFG3.vgPuKeX9x5.6z9LEFCqHRP65qG',NULL,'2020-04-06 20:36:46','2020-04-06 22:29:41',1);
+	(1,'Dummy User','dummy@dummy.com',NULL,'$2y$10$IK2.JPmCBUmQAt2JzmfH6uqFG3.vgPuKeX9x5.6z9LEFCqHRP65qG',NULL,'2020-04-06 20:36:46','2020-04-06 22:29:41',1,'en');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
