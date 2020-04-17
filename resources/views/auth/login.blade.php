@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-md-5 offset-md-3">
 					{{ Form::open(array('url' => route('login'), 'class' => '')) }}
-						<img class="pb-4 d-block d-sm-none" src="{{ asset('img/logo_login.png') }}" />
+						<img class="pb-4 d-block d-sm-none m-auto" src="{{ asset('img/logo_login.png') }}" />
 						<h1>{{ __('Cockpit login') }}</h1>
 						@if (session('message'))
 						<div class="alert alert-{{ session('message.type')}}">{{ session('message.text')}}</div>

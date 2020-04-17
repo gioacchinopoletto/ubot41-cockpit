@@ -4,7 +4,7 @@
 
 	<div class="row login">
 		<div class="col-md-6 align-items-center h-100 d-inline-block bg-nero text-center align-middle">
-			<img class="logo-sx d-none d-sm-inline-block" src="{{ asset('img/logo_login.png') }}" />
+			<img class="logo-sx d-none d-sm-inline-block m-auto" src="{{ asset('img/logo_login.png') }}" />
 		</div>
 		<div class="col-md-6 align-items-center h-100 d-inline-block">
 			<div class="row">
