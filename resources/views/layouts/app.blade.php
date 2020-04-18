@@ -51,17 +51,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
+                            @if(config('cockpit.show_lang') == true)
+                            <li class="nav-item dropdown">
+                            	<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="material-icons" style="padding-top: 7px">translate</span></a>	
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+									@if(session('applocale') == 'it')
+										<a class="dropdown-item" href="{{ url('/lang/en') }}">English</a>
+									@else <!-- if session is null or not set we have EN as default language -->
+										<a class="dropdown-item" href="{{ url('/lang/it') }}">Italiano</a>
+									@endif
+								</div>
+							</li>
+							@endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 	                                @php
@@ -84,19 +85,7 @@
                                     </form>
                                 </div>
                             </li>
-                            @if(config('cockpit.show_lang') == true)
-                            <li class="nav-item dropdown">
-                            	<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="material-icons" style="padding-top: 7px">translate</span></a>	
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-									@if(session('applocale') == 'it')
-										<a class="dropdown-item" href="{{ url('/lang/en') }}">English</a>
-									@else <!-- if session is null or not set we have EN as default language -->
-										<a class="dropdown-item" href="{{ url('/lang/it') }}">Italiano</a>
-									@endif
-								</div>
-							</li>
-							@endif
-                        @endguest
+                            
                     </ul>
                 </div>
             </div>
