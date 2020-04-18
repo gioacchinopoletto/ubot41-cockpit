@@ -84,6 +84,7 @@
                                     </form>
                                 </div>
                             </li>
+                            @if(config('cockpit.show_lang') == true)
                             <li class="nav-item dropdown">
                             	<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="material-icons" style="padding-top: 7px">translate</span></a>	
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -94,6 +95,7 @@
 									@endif
 								</div>
 							</li>
+							@endif
                         @endguest
                     </ul>
                 </div>
