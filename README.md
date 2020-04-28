@@ -21,7 +21,7 @@ We have users, groups and permissions management, multi language interface (fres
 - **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 - **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)**: debug bar (only for dev environment)
-- **[Laravel Validation Rules](https://github.com/alphametric/laravel-validation-rules)**: additional validation rules
+- **[Axiom](https://github.com/mattkingshott/axiom)**: additional validation rules
 
 ## Installation
 1. Clone or download this repo
