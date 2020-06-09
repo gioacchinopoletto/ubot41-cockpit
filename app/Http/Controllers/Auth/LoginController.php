@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 use Session;
 use Auth;
 use Redirect;
-use Illuminate\Http\Request;
+use Socialite;
+use Exception;
+use App\User;
+
 
 class LoginController extends Controller
 {
@@ -53,7 +58,7 @@ class LoginController extends Controller
     }
     
     /**
-     * Get the needed authorization credentials from the request. (copied from AuthenticatesUsers trait
+     * Get the needed authorization credentials from the request. (copied from AuthenticatesUsers trait)
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -77,4 +82,34 @@ class LoginController extends Controller
     {
         Session::put('applocale', $user->locale);
     }
+    
+    
+    public function redirectToFacebook() 
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    
+    public function handleFacebookCallback() 
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $finduser = User::where('facebook_id', $user->id)->first();
+            if ($finduser) {
+	            
+                Auth::login($finduser);
+                return redirect('/home');
+            
+            } else {
+                
+                $newUser = User::create(['name' => $user->name, 'email' => $user->email, 'facebook_id' => $user->id]);
+                Auth::login($newUser);
+                return redirect()->back();
+            
+            }
+        }
+        catch(Exception $e) {
+            return redirect('login/facebook');
+        }
+    }
+    
 }

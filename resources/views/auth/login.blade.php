@@ -38,6 +38,9 @@
 	                        {{ __('Forgot your password?') }}</a>
 	                    </p>
 					@endif
+					<p>
+						<a class="lin" href="{{ route('login.facebook') }}">{{ __('Login with Facebook') }}</a>
+					</p>
 					@if (Route::has('register'))
                     	<p>
                         	<a class="lin" title="{{ __('register to Cockpit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>

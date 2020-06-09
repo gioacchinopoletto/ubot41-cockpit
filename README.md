@@ -22,6 +22,7 @@ We have users, groups and permissions management, multi language interface (fres
 - **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
 - **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)**: debug bar (only for dev environment)
 - **[Axiom](https://github.com/mattkingshott/axiom)**: additional validation rules
+- **[Laravel Socialite](https://laravel.com/docs/7.x/socialite)**: additional auth options
 
 ## Installation
 1. Clone or download this repo
@@ -31,6 +32,7 @@ We have users, groups and permissions management, multi language interface (fres
 5. Run `php artisan key:generate` to generate a new `APP_KEY` for your app 
 6. We use database session. Please run: `php artisan migrate` before import our dummy data
 7. Update `/config/cockpit.php` and `/config/app.php` files with your personal data
+8. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite
 
 
 ### Installation notes

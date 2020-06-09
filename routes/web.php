@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::get('login/facebook', ['as' => 'login.facebook', 'uses' => 'Auth\LoginController@redirectToFacebook']);
+Route::get('login/facebook/callback', ['as' => 'callback.facebook', 'uses' => 'Auth\LoginController@handleFacebookCallback']);
 
 Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
 
