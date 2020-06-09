@@ -25,8 +25,8 @@ We have users, groups and permissions management, multi language interface (fres
 
 ## Installation
 1. Clone or download this repo
-2. Run `php artisan key:generate` to generate a new `APP_KEY` for your app 
 2. Run `composer update` to update all project dependencies
+2. Run `php artisan key:generate` to generate a new `APP_KEY` for your app 
 3. We use database session. Please run: `php artisan migrate` before import our dummy data
 4. Update `.env` file with your personal data
 5. Update `/config/cockpit.php` and `/config/app.php` files with your personal data
