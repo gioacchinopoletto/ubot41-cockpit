@@ -4,4 +4,7 @@
 - laravel/framework to ^8.0 ==> OK
 - laravel/ui to ^3.0 ==> OK
 - nunomaduro/collision to ^5.0 ==> OK
-- phpunit/phpunit to ^9.0 ==>
+- phpunit/phpunit to ^9.0 ==> OK
+
+- bootstrap ==> 4.5.2
+-

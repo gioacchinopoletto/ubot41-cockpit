@@ -12,7 +12,7 @@ We have users, groups and permissions management, multi language interface (fres
 ## Based on
 
 - **[Laravel](https://laravel.com)**: PHP framework
-- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.1)
+- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.2)
 
 ### Add-on libraries and dependencies
 
