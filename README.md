@@ -1,4 +1,4 @@
-<p align="center"><img src="https://www.ubot41.ch/img/UbotLogo.svg" width="120"></p>
+<p align="center"><img src="https://ubot41.ch/wp-content/uploads/2020/09/discord_round.png" width="120"></p>
 
 <p align="center">
 <a href="https://www.ubot41.ch"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
