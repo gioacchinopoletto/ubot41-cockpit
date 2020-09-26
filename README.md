@@ -25,17 +25,18 @@ We have users, groups and permissions management, multi language interface (fres
 - **[Laravel Socialite](https://laravel.com/docs/7.x/socialite)**: additional auth options
 
 ## Installation
+
 1. Clone or download this repo
 2. Run `composer update` to update all project dependencies
 3. Rename `.env.example` file to `.env`
 4. Update `.env` file with your personal data
-5. Run `php artisan key:generate` to generate a new `APP_KEY` for your app 
+5. Run `php artisan key:generate` to generate a new `APP_KEY` for your app
 6. We use database session. Please run: `php artisan migrate` before import our dummy data
 7. Update `/config/cockpit.php` and `/config/app.php` files with your personal data
 8. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite
 
-
 ### Installation notes
+
 **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management: login with `dummy@dummy.com` as username and `dummydummy` as password for the first time
 
 We have add db seeders with all dummy data. After database migration, run `php artisan db:seed` to populate the database. Into `/mysql` you can find our mysql dump if you don't like seeders.
@@ -43,7 +44,6 @@ We have add db seeders with all dummy data. After database migration, run `php a
 ## Contributing
 
 Thank you for considering contributing to the UBOT41 Cockpit.
-
 
 ## License
 
