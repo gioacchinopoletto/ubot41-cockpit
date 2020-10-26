@@ -11,18 +11,18 @@ We have users, groups and permissions management, multi language interface (fres
 
 ## Based on
 
-- **[Laravel](https://laravel.com)**: PHP framework
-- **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.2)
+-   **[Laravel](https://laravel.com)**: PHP framework
+-   **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.3)
 
 ### Add-on libraries and dependencies
 
-- **[jQuery](https://jquery.com)**: main JS library
-- **[Laravel Collective](https://laravelcollective.com)**: Form & HTML library **(required)**
-- **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
-- **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
-- **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)**: debug bar (only for dev environment)
-- **[Axiom](https://github.com/mattkingshott/axiom)**: additional validation rules
-- **[Laravel Socialite](https://laravel.com/docs/7.x/socialite)**: additional auth options
+-   **[jQuery](https://jquery.com)**: main JS library. If you are planning to develop an admin panel with Ajax interaction, please change **JQuery Slim** carried out with Bootsrap with **JQuery Standard**
+-   **[Laravel Collective](https://laravelcollective.com)**: Form & HTML library **(required)**
+-   **[Spatie Permissions](https://docs.spatie.be/laravel-permission/v3/introduction/)**: Role and permissions library **(required)**
+-   **[Google Material Icons](https://google.github.io/material-design-icons/)**: Icons **(required)**
+-   **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)**: debug bar (only for dev environment)
+-   **[Axiom](https://github.com/mattkingshott/axiom)**: additional validation rules
+-   **[Laravel Socialite](https://laravel.com/docs/7.x/socialite)**: additional auth options
 
 ## Installation
 
