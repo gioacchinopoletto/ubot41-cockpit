@@ -43,7 +43,7 @@ body {
   background: $bianco;
   position: absolute;
   bottom: 0;
-}	
+}
 
 // --- typo ---//
 h1 {
@@ -62,7 +62,15 @@ a.lin:focus {
 	color: $blu;
 	text-decoration: none;
 }
-	
+a.spaced:first-of-type {
+	margin-right: 5px;
+	margin-left: 0;
+}
+a.spaced:last-of-type {
+	margin-right: 0;
+	margin-left: 5px;
+}
+
 // --- login & register ---//
 .login {
 	height: auto;
@@ -84,7 +92,7 @@ a.lin:focus {
 thead .material-icons,
 .pagination .material-icons,
 a .material-icons,
-button .material-icons { 
+button .material-icons {
 	font-size: 81.25% !important; // 13px, 0.8125em
 }
 	thead .material-icons {
@@ -106,10 +114,10 @@ button .material-icons {
 
 // --- admin ux ---//
 .button-separator {
-	@include separator(10px, 10px); 
+	@include separator(10px, 10px);
 }
 .col-divid-3 {
   column-count: 3;
   column-gap: 30px;
   margin-bottom: 30px;
-}		
+}

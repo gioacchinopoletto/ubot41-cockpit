@@ -2,9 +2,12 @@
     "Italian" : "Italiano",
     "English" : "Inglese",
     "Cockpit login" : "Accedi a Cockpit",
+    "Cockpit registration" : "Registrati a Cockpit",
     "Login with Facebook" : "Accedi con Facebook",
+    "login to Cockpit" : "Accedi a Cockpit",
     "Login" : "Accedi",
     "Logout" : "Esci",
+    "Register" : "Registrati",
     "You have successfully logged out" : "Sei uscito con successo",
     "Forgot your password?" : "Password dimenticata?",
     "receive a password reset link" : "ricevi un link per il reset della tua password",
@@ -18,7 +21,8 @@
     "A fresh verification link has been sent to your email address" : "Ti abbiamo inviato via email un link per la verifica della password",
     "Back to login" : "Torna al login",
     "Send password reset link" : "Invia link per il reset della password",
-    
+    "Have an account?" : "Hai già un account?",
+
     "Personal permissions" : "Permessi personali",
     "Profile" : "Profilo",
     "Users" : "Utenti",
@@ -33,7 +37,7 @@
     "<strong>:name</strong> (edit)" : "<strong>:name</strong> (modifica)",
     "Type password only if you want to change it" : "Digita la password solo se desideri cambiarla",
     "You can change your avatar setting your email with <a href='https://en.gravatar.com' target='_blank'>Gravatar</a>." : "Puoi cambiare il tuo avatar impostando la tua email su <a href='https://en.gravatar.com' target='_blank'>Gravatar</a>.",
-    
+
     "Role" : "Ruolo",
     "Roles" : "Ruoli",
     "Add role to user" : "Assegna ruolo",
@@ -44,8 +48,8 @@
     "Add or remove permission to role" : "Aggiungi o modifica i permessi per il ruolo",
     "Role <strong>:name</strong> successfully edited" : "Ruolo <strong>:name</strong> modificato con successo",
     "Role <strong>:name</strong> can be deleted" : "Il ruolo <strong>:name</strong> non può essere cancellato",
-    "Role <strong>:name</strong> successfully deleted" : "Ruolo <strong>:name</strong> cancellato con successo",  
-    
+    "Role <strong>:name</strong> successfully deleted" : "Ruolo <strong>:name</strong> cancellato con successo",
+
     "Permissions" : "Permessi",
     "Permission (key)" : "Permesso (chiave)",
     "Add permission" : "Aggiungi permesso",
@@ -60,7 +64,7 @@
     "Inherit from user role" : "Ereditato dal ruolo utente",
     "Personal permission" : "Permesso personale",
     "Personal permissions successfully edited for user <strong>:name</strong>" : "Permessi personali modificati con successo per <strong>:name</strong>",
-    
+
     "Email" : "Indirizzo email",
     "Password" : "Password",
     "Password confirmation" : "Conferma password",

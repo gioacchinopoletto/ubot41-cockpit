@@ -41,6 +41,12 @@ We have users, groups and permissions management, multi language interface (fres
 
 We have add db seeders with all dummy data. After database migration, run `php artisan db:seed` to populate the database. Into `/mysql` you can find our mysql dump if you don't like seeders.
 
+## Blade sections
+UBOT41 Cockpit comes with X areas by default:
+- `top-scripts`: header scripts
+- `content`: main page content
+- `bottom-scripts`: bottom scripts, executed after Bootstrap and JQuery load
+
 ## Contributing
 
 Thank you for considering contributing to the UBOT41 Cockpit.
