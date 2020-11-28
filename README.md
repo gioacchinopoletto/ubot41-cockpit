@@ -32,14 +32,16 @@ We have users, groups and permissions management, multi language interface (fres
 4. Update `.env` file with your personal data
 5. Run `php artisan key:generate` to generate a new `APP_KEY` for your app
 6. We use database session. Please run: `php artisan migrate` before import our dummy data
-7. Update `/config/cockpit.php` and `/config/app.php` files with your personal data
-8. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite
+7. Update `/config/cockpit.php` and `/config/app.php` files with your personal data and options
+8. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite (if you are using Socialite don't forget to set options on `/config/cockpit.php`)
 
 ### Installation notes
 
 **dummy data**: our dummy data have only 1 admin user with first permissions for user, roles and permissions management: login with `dummy@dummy.com` as username and `dummydummy` as password for the first time
 
 We have add db seeders with all dummy data. After database migration, run `php artisan db:seed` to populate the database. Into `/mysql` you can find our mysql dump if you don't like seeders.
+
+**socialite**: as example we have provided Facebook login, but you can add more services. Don't forget to add more service on `/resources/views/auth/login.blade.php`.
 
 ## Blade sections
 UBOT41 Cockpit comes with X areas by default:

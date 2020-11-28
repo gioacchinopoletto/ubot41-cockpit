@@ -43,9 +43,11 @@
             <a class="lin spaced" title="{{ __('register to Cockpit') }}" href="{{ route('register') }}">{{ __('Register new account') }}</a>
         	@endif
 					</p>
+					@if(config('cockpit.show_socialite') == true)
 					<p class="text-center">
 						<a class="lin" href="{{ route('login.facebook') }}">{{ __('Login with Facebook') }}</a>
 					</p>
+					@endif
 					@if(session('applocale') == 'it')
       				<p class="text-muted text-center">Do you speak <a class="lin" href="{{ url('/lang/en') }}">english</a>?</p>
           @else <!-- if session is null or not set we have EN as default language -->
