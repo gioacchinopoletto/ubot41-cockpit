@@ -14,6 +14,8 @@ We have users, groups and permissions management, multi language interface (fres
 -   **[Laravel](https://laravel.com)**: PHP framework
 -   **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.3)
 
+We are using only Bootstrap CSS framework instead of Tailwind CSS coming as default in since Laravel 8.
+
 ### Add-on libraries and dependencies
 
 -   **[jQuery](https://jquery.com)**: main JS library. If you are planning to develop an admin panel with Ajax interaction, please change **JQuery Slim** carried out with Bootsrap with **JQuery Standard**
