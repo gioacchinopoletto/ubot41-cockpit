@@ -5,7 +5,7 @@
 <div class="row m-5">
 	<div class="col-md-12">
 
-    <h1> 
+    <h1>
 	    <img class="rounded-circle mr-1" src="https://www.gravatar.com/avatar/{{$hashUser}}?r=g&d=identicon&s=30">
 	    {!! __('<strong>:name</strong> (edit)', ['name' => $user->name]) !!}
     </h1>
@@ -18,15 +18,26 @@
     </p>
 
     {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT', 'class' => '')) }}
-	
-					<div class="form-group">
+			<div class="row">
+					<div class="form-group col-md-10">
 				       	{{ Form::label('name', __('Fullname')) }}
 				        {{ Form::text('name', null, array('class' => 'form-control form-control-sm')) }}
 				        @error('name')
 							<div class="alert alert-danger">{{ $message }}</div>
 						@enderror
 				    </div>
-				
+						<div class="form-check col-md-1">
+					       	{{ Form::radio('locale', 'it', $user->locale, array('class' => 'form-check-input')) }}
+					       	{{ Form::label('locale', __('Italian'), array('class' => 'form-check-label')) }}
+						</div>
+						<div class="form-check col-md-1">
+					        {{ Form::radio('locale', 'en', $user->locale, array('class' => 'form-check-input')) }}
+					        {{ Form::label('locale', __('English'), array('class' => 'form-check-label')) }}
+					    </div>
+					    @error('locale')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
+			</div>
 					<div class="form-group">
 				       	{{ Form::label('email', __('Email')) }}
 				        {{ Form::text('email', null, array('class' => 'form-control form-control-sm')) }}
@@ -34,7 +45,7 @@
 							<div class="alert alert-danger">{{ $message }}</div>
 						@enderror
 				    </div>
-				
+
 					<div class="form-group">
 				       	{{ Form::label('password', __('Password') ) }}
 						{{ Form::password('password', array('class' => 'form-control form-control-sm')) }}
@@ -45,7 +56,7 @@
 							<div class="alert alert-danger">{{ $message }}</div>
 						@enderror
 				    </div>
-				    
+
 				    <div class="form-group">
 				       	{{ Form::label('password_confirmation', __('Password confirmation') ) }}
 						{{ Form::password('password_confirmation', array('class' => 'form-control form-control-sm')) }}
@@ -53,11 +64,11 @@
 							<div class="alert alert-danger">{{ $message }}</div>
 						@enderror
 				    </div>
-				
+
 					<h1 class="mt-5 mb-3">{{ __('Add role to user') }}</h1>
 					<div class='form-group'>
-				        
-					        @foreach ($roles as $role) 
+
+					        @foreach ($roles as $role)
 					        	<div class="form-check form-check-inline">
 									<label>
 									{{ Form::checkbox('roles[]',  $role->id ) }}
@@ -65,17 +76,17 @@
 									</label>
 					        	</div>
 					        @endforeach
-					      
+
 				    </div>
 				    @error('roles')
 						<div class="alert alert-danger">{{ $message }}</div>
 					@enderror
-	
+
 	{{ Form::submit(__('Save'), array('class' => 'btn btn-dark btn-sm btn-block')) }}
 
-    {{ Form::close() }}	
-	
-	    	
+    {{ Form::close() }}
+
+
 </div>
 </div>
 
