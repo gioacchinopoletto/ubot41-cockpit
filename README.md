@@ -1,5 +1,3 @@
-<p align="center"><img src="https://ubot41.ch/wp-content/uploads/2020/09/discord_round.png" width="120"></p>
-
 <p align="center">
 <a href="https://www.ubot41.ch"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
@@ -31,11 +29,12 @@ We are using only Bootstrap CSS framework instead of Tailwind CSS coming as defa
 1. Clone or download this repo
 2. Run `composer update` to update all project dependencies
 3. Rename `.env.example` file to `.env`
-4. Update `.env` file with your personal data
-5. Run `php artisan key:generate` to generate a new `APP_KEY` for your app
-6. We use database session. Please run: `php artisan migrate` before import our dummy data
-7. Update `/config/cockpit.php` and `/config/app.php` files with your personal data and options
-8. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite (if you are using Socialite don't forget to set options on `/config/cockpit.php`)
+4. Create your MySQL database on `localhost`
+5. Update `.env` file with your personal data (especially with database credentials)
+6. Run `php artisan key:generate` to generate a new `APP_KEY` for your app
+7. We use database session. Please run: `php artisan migrate` before import our dummy data
+8. Update `/config/cockpit.php` and `/config/app.php` files with your personal data and options
+9. Update `/config/services.php` file with your Facebook API data if you need Facebook auth via Laravel Socialite (if you are using Socialite don't forget to set options on `/config/cockpit.php`)
 
 ### Installation notes
 
@@ -46,10 +45,12 @@ We have add db seeders with all dummy data. After database migration, run `php a
 **socialite**: as example we have provided Facebook login, but you can add more services. Don't forget to add more service on `/resources/views/auth/login.blade.php`.
 
 ## Blade sections
+
 UBOT41 Cockpit comes with X areas by default:
-- `top-scripts`: header scripts
-- `content`: main page content
-- `bottom-scripts`: bottom scripts, executed after Bootstrap and JQuery load
+
+-   `top-scripts`: header scripts
+-   `content`: main page content
+-   `bottom-scripts`: bottom scripts, executed after Bootstrap and JQuery load
 
 ## Contributing
 
