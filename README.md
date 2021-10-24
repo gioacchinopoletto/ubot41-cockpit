@@ -10,7 +10,7 @@ We have users, groups and permissions management, multi language interface (fres
 ## Based on
 
 -   **[Laravel](https://laravel.com)**: PHP framework
--   **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.3)
+-   **[Bootstrap](https://getbootstrap.com/)**: CSS/JS framework (minimum version 4.5.3, current version 5.1.3)
 
 We are using only Bootstrap CSS framework instead of Tailwind CSS coming as default in since Laravel 8.
 
