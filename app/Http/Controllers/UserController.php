@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
 use App\User;
-use Auth;
 
 use Illuminate\Support\Facades\Log;
 
